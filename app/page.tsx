@@ -1,0 +1,553 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+export default function Home() {
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const certifications = [
+    "GCP Introduction E6(R3)",
+    "Introduction to Pharmacovigilance",
+    "IMP Management",
+    "Introduction to Decentralised Trials",
+    "Clinical Data Management",
+    "Ethical & Regulatory Aspects of Clinical Research",
+    "Introduction to Principles & Practice of Clinical Research",
+    "GCP by NIDA CTN",
+  ];
+  const skillCategories = [
+  {
+    title: "Drug Safety",
+    skills: [
+      "Adverse Event Reporting",
+      "ICSR Processing",
+      "Case Triage",
+      "Signal Detection",
+      "MedDRA Coding",
+    ],
+  },
+  {
+    title: "Clinical Research",
+    skills: [
+      "Good Clinical Practice (GCP)",
+      "Clinical Trial Documentation",
+      "Protocol Review",
+      "Research Methodology",
+      "Data Collection",
+    ],
+  },
+  {
+    title: "Regulatory",
+    skills: [
+      "FDA Guidelines",
+      "Pharmacovigilance Regulations",
+      "Risk Management",
+      "Regulatory Compliance",
+    ],
+  },
+  {
+    title: "Technical",
+    skills: [
+      "Microsoft Excel",
+      "Literature Review",
+      "Scientific Documentation",
+      "Data Analysis",
+    ],
+  },
+];
+
+  return (
+    <main className="min-h-screen text-white">
+
+      {/* NAVBAR */}
+      <div
+  onMouseEnter={() => setShowNavbar(true)}
+  className="fixed top-0 left-0 z-[60] h-2 w-full"
+/>
+      <motion.nav
+  onMouseLeave={() => setShowNavbar(false)}
+  initial={{ y: -100 }}
+  animate={{
+    y: showNavbar ? 0 : -120,
+    opacity: showNavbar ? 1 : 0,
+  }}
+  transition={{ duration: 0.25 }}
+  className="glass-navbar fixed top-0 z-50 w-full"
+>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <a href="#" className="text-lg font-bold tracking-wide">
+            Dr. BATHRINATH M S
+          </a>
+
+          <div className="hidden items-center gap-8 md:flex">
+  <a href="#about" className="hover:text-cyan-400">About</a>
+  <a href="#skills" className="hover:text-cyan-400">Skills</a>
+  <a href="#experience" className="hover:text-cyan-400">
+  Experience
+</a>
+  <a href="#education" className="hover:text-cyan-400">Education</a>
+  <a href="#publications" className="hover:text-cyan-400">Publications</a>
+  <a href="#certifications" className="hover:text-cyan-400">Certifications</a><a href="#achievements" className="hover:text-cyan-400">
+  Achievements
+</a>
+  <a href="#connect" className="hover:text-cyan-400">Connect</a>
+</div>
+
+          <a
+            href="https://www.linkedin.com/in/drbathrinath"
+            target="_blank"
+            className="rounded-xl bg-cyan-500 px-5 py-2 font-semibold text-black hover:scale-105 transition"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </motion.nav>
+
+      {/* HERO */}
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-16">
+
+        <div className="hero-glow hero-glow-left" />
+        <div className="hero-glow hero-glow-right" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="glass-card mx-auto w-full max-w-6xl rounded-3xl p-10 text-center md:p-16"
+        >
+          <span className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm">
+            Drug Safety • Pharmacovigilance • Clinical Research
+          </span>
+
+          <h1 className="glow-text mb-6 text-5xl font-bold md:text-7xl">
+            Dr. BATHRINATH M S
+          </h1>
+
+          <p className="text-lg text-gray-300 md:text-2xl">
+            Pharmacovigilance Professional Focused on Drug Safety & Clinical Research
+          </p>
+
+          <p className="mx-auto mt-6 max-w-3xl text-gray-400">
+            Pharm.D graduate with strong interest in Pharmacovigilance, Drug Safety,
+            Clinical Research, Regulatory Compliance, and Clinical Operations.
+          </p>
+
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <a
+  href="https://www.linkedin.com/in/drbathrinath"
+  target="_blank"
+  className="rounded-xl bg-blue-600 px-6 py-3 font-semibold hover:bg-blue-700"
+>
+  LinkedIn
+</a>
+
+<a
+  href="#connect"
+  className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-110 hover:shadow-cyan-400/50"
+>
+  Contact Me
+</a>
+
+<a
+  href="/resume.pdf"
+  target="_blank"
+  className="rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black hover:scale-105 transition"
+>
+  View Resume
+</a>
+          </div>
+
+          {/* HIGHLIGHT CARDS */}
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+
+  <div className="glass-card rounded-2xl p-6">
+    <h3 className="text-3xl font-bold text-cyan-400">2 Years</h3>
+    <p className="mt-2 text-gray-400">Clinical Experience</p>
+  </div>
+
+  <div className="glass-card rounded-2xl p-6">
+    <h3 className="text-3xl font-bold text-cyan-400">15+</h3>
+    <p className="mt-2 text-gray-400">ADRs Documented</p>
+  </div>
+
+  <div className="glass-card rounded-2xl p-6">
+    <h3 className="text-3xl font-bold text-cyan-400">11</h3>
+    <p className="mt-2 text-gray-400">Clinical Departments</p>
+  </div>
+
+</div>
+        </motion.div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="mx-auto max-w-6xl px-6 py-24">
+        <div className="glass-card rounded-3xl p-10">
+          <h2 className="mb-6 text-3xl font-bold">About Me</h2>
+          <p className="text-gray-300 leading-8 text-justify">
+  I am a Pharm.D graduate with strong interest in Pharmacovigilance,
+  Drug Safety, and Clinical Research. I have exposure to clinical departments,
+  research publication experience, and multiple industry certifications.
+</p>
+        </div>
+      </section>
+{/* SKILLS */}
+<section id="skills" className="mx-auto max-w-6xl px-6 pb-24">
+
+  <div className="mb-12 text-center">
+    <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+      Professional Expertise
+    </p>
+
+    <h2 className="text-4xl font-bold">
+      Skills & Competencies
+    </h2>
+
+    <p className="mx-auto mt-4 max-w-2xl text-gray-400">
+      Core competencies developed through Pharm.D training,
+      clinical exposure, research activities, and professional certifications.
+    </p>
+  </div>
+
+  <div className="grid gap-6 md:grid-cols-2">
+    {skillCategories.map((category) => (
+      <div
+        key={category.title}
+        className="glass-card rounded-3xl p-8"
+      >
+        <h3 className="mb-6 text-xl font-semibold text-cyan-400">
+          {category.title}
+        </h3>
+
+        <div className="flex flex-wrap gap-3">
+          {category.skills.map((skill) => (
+            <span
+              key={skill}
+              className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm text-gray-200"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+
+      </div>
+    ))}
+  </div>
+
+</section>
+
+{/* EDUCATION */}
+<section id="education" className="mx-auto max-w-6xl px-6 pb-24">
+
+  <div className="mb-12 text-center">
+    <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+      Academic Background
+    </p>
+
+    <h2 className="text-4xl font-bold">
+      Education
+    </h2>
+  </div>
+
+  <div className="glass-card rounded-3xl p-10">
+
+    <div className="border-l-2 border-cyan-500 pl-8">
+
+      <div className="mb-10">
+        <h3 className="text-2xl font-semibold">
+          Doctor of Pharmacy (Pharm.D)
+        </h3>
+
+        <p className="mt-2 text-cyan-400">
+          Annamalai University, FEAT – Chidambaram
+        </p>
+
+        <p className="mt-2 text-gray-400">
+           Pharmacovigilance • Clinical Research • Clinical Pharmacy
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-xl font-semibold">
+          Professional Focus
+        </h3>
+
+        <p className="mt-2 text-gray-400 leading-7">
+          Developed strong foundations in drug safety,
+          adverse event monitoring, clinical research,
+          patient care, regulatory compliance, literature
+          evaluation, and evidence-based medicine.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+{/* EXPERIENCE */}
+<section id="experience" className="mx-auto max-w-6xl px-6 pb-24">
+
+  <div className="mb-12 text-center">
+    <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+      Professional Journey
+    </p>
+
+    <h2 className="text-4xl font-bold">
+      Clinical Training & Experience
+    </h2>
+  </div>
+
+  <div className="space-y-8">
+
+    <div className="glass-card rounded-3xl p-8">
+
+      <h3 className="text-2xl font-bold">
+        Pharm.D Final Year Internship
+      </h3>
+
+      <p className="mt-2 text-cyan-400">
+        Government Cuddalore Medical College & Hospital
+      </p>
+
+      <p className="mt-1 text-gray-500">
+        Aug 2025 – Aug 2026
+      </p>
+
+      <ul className="mt-6 space-y-3 text-gray-300">
+        <li>• Documented and managed 15 Adverse Drug Reactions (ADRs)</li>
+        <li>• Performed WHO-UMC causality assessments</li>
+        <li>• Applied Naranjo Scale for ADR evaluation</li>
+        <li>• Escalated 1 Serious Adverse Event (SAE)</li>
+        <li>• Maintained GCP-compliant documentation</li>
+        <li>• Worked with CRFs and Informed Consent Files</li>
+        <li>• Participated in ward rounds and medication reviews</li>
+      </ul>
+
+    </div>
+
+    <div className="glass-card rounded-3xl p-8">
+
+      <h3 className="text-2xl font-bold">
+        Academic Clinical Clerkship
+      </h3>
+
+      <p className="mt-2 text-cyan-400">
+        Government Cuddalore Medical College & Hospital
+      </p>
+
+      <p className="mt-1 text-gray-500">
+        Jul 2024 – Jul 2025
+      </p>
+
+      <div className="mt-6 flex flex-wrap gap-3">
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          General Medicine
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Surgery
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Pediatrics
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Obstetrics & Gynaecology
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Psychiatry
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Pulmonology
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Orthopaedics
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          ENT
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Ophthalmology
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          Dermatology
+        </span>
+
+        <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">
+          DVL
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+     {/* PUBLICATIONS */}
+<section id="publications" className="mx-auto max-w-6xl px-6 pb-24">
+
+  <h2 className="mb-4 text-center text-3xl font-bold">
+    Research Publications
+  </h2>
+
+  <div className="grid gap-6 md:grid-cols-2">
+
+    <div className="glass-card rounded-3xl p-8">
+
+      <h3 className="mb-4 text-xl font-semibold">
+        Evaluation of Postoperative Pain Management Strategies in Haemorrhoidectomy
+      </h3>
+
+      <p className="mb-6 text-gray-400">
+        IJISRT • Vol 10 • Issue 8 • Aug 2025
+      </p>
+
+      <a
+        href="https://doi.org/10.38124/ijisrt/25aug1277"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-105"
+      >
+        View Publication →
+      </a>
+
+    </div>
+
+    <div className="glass-card rounded-3xl p-8">
+
+      <h3 className="mb-4 text-xl font-semibold">
+        Comparative Analysis of Oral Labetalol vs Oral Nifedipine in Gestational Hypertension
+      </h3>
+
+      <p className="mb-6 text-gray-400">
+        VVI Journal • Vol 13 • Issue 5 • 2025
+      </p>
+
+      <a
+        href="https://vvijournal.com/volume-13-issue-5-2025/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-105"
+      >
+        View Publication →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+      {/* CERTIFICATIONS */}
+      <section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
+        <h2 className="mb-8 text-center text-3xl font-bold">
+          Certifications
+        </h2>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {certifications.map((cert) => (
+            <div key={cert} className="glass-card rounded-2xl p-5">
+              {cert}
+            </div>
+          ))}
+        </div>
+      </section>
+{/* ACHIEVEMENTS */}
+<section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
+
+  <div className="mb-12 text-center">
+    <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
+      Recognition & Accomplishments
+    </p>
+
+    <h2 className="text-4xl font-bold">
+      Achievements
+    </h2>
+  </div>
+
+  <div className="grid gap-6 md:grid-cols-2">
+
+    <div className="glass-card rounded-3xl p-8">
+      <h3 className="text-xl font-bold text-cyan-400">
+        88%
+      </h3>
+
+      <p className="mt-3 text-gray-300">
+        Medclinigen National Clinical Research Talent Assessment
+      </p>
+    </div>
+
+    <div className="glass-card rounded-3xl p-8">
+      <h3 className="text-xl font-bold text-cyan-400">
+        87.5%
+      </h3>
+
+      <p className="mt-3 text-gray-300">
+        Clinical Data Management Talent Assessment
+      </p>
+    </div>
+
+    <div className="glass-card rounded-3xl p-8">
+      <h3 className="text-xl font-bold text-cyan-400">
+        Stanford Medicine CME
+      </h3>
+
+      <p className="mt-3 text-gray-300">
+        Hypertension in Primary Care Certification
+      </p>
+    </div>
+
+    <div className="glass-card rounded-3xl p-8">
+      <h3 className="text-xl font-bold text-cyan-400">
+        Guinness World Record
+      </h3>
+
+      <p className="mt-3 text-gray-300">
+        Contributor - Cipla #PharmacistFightsAMR Campaign
+      </p>
+    </div>
+
+  </div>
+
+</section>
+      {/* CONNECT */}
+      <section id="connect" className="mx-auto max-w-6xl px-6 pb-24">
+        <div className="glass-card rounded-3xl p-10 text-center">
+
+          <h2 className="mb-6 text-3xl font-bold">Let's Connect</h2>
+
+          <p className="mb-6 text-gray-300">
+            Interested in Pharmacovigilance, Drug Safety, Clinical Research,
+            or Collaboration Opportunities.
+          </p>
+
+          <div className="space-y-2 text-gray-300">
+            <p>📍 Chennai, India</p>
+            <p>📧 bathrinathshanmugam7@gmail.com</p>
+            <p>📱 +91 90425 11773</p>
+          </div>
+
+          <a
+            href="https://www.linkedin.com/in/drbathrinath"
+            target="_blank"
+            className="mt-8 inline-block rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black hover:scale-105 transition"
+          >
+            Connect on LinkedIn
+          </a>
+
+        </div>
+      </section>
+
+    </main>
+  );
+}
