@@ -105,7 +105,7 @@ export default function Home() {
       </motion.nav>
 
       {/* HERO */}
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-16">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-16 pb-16">
 
         <div className="hero-glow hero-glow-left" />
         <div className="hero-glow hero-glow-right" />
@@ -120,7 +120,7 @@ export default function Home() {
             Drug Safety • Pharmacovigilance • Clinical Research
           </span>
 
-          <h1 className="glow-text mb-6 text-5xl font-bold md:text-7xl">
+          <h1 className="glow-text mb-6 text-3xl font-bold sm:text-5xl md:text-7xl">
             Dr. BATHRINATH M S
           </h1>
 
