@@ -7,15 +7,15 @@ export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
 
   const certifications = [
-    "GCP Introduction E6(R3)",
-    "Introduction to Pharmacovigilance",
-    "IMP Management",
-    "Introduction to Decentralised Trials",
-    "Clinical Data Management",
-    "Ethical & Regulatory Aspects of Clinical Research",
-    "Introduction to Principles & Practice of Clinical Research",
-    "GCP by NIDA CTN",
-  ];
+  { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
+  { name: "Introduction to Pharmacovigilance", issuer: "PharmUni – Zaman Pharma", year: "2026" },
+  { name: "IMP Management", issuer: "NIHR", year: "2026" },
+  { name: "Introduction to Decentralised Trials", issuer: "NIHR", year: "2026" },
+  { name: "Clinical Data Management", issuer: "Medclinigen", year: "2026" },
+  { name: "Ethical & Regulatory Aspects of Clinical Research", issuer: "NIH", year: "2026" },
+  { name: "Principles & Practice of Clinical Research", issuer: "NIH", year: "2026" },
+  { name: "GCP by NIDA CTN", issuer: "NIDA CTN", year: "2026" },
+];
   const skillCategories = [
   {
     title: "Drug Safety",
@@ -449,19 +449,33 @@ export default function Home() {
 </section>
 
       {/* CERTIFICATIONS */}
-      <section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
-        <h2 className="mb-8 text-center text-3xl font-bold">
-          Certifications
-        </h2>
+<section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
+  <h2 className="mb-8 text-center text-3xl font-bold">
+    Certifications
+  </h2>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {certifications.map((cert) => (
-            <div key={cert} className="glass-card rounded-2xl p-5">
-              {cert}
-            </div>
-          ))}
+  <div className="grid gap-4 md:grid-cols-2">
+    {certifications.map((cert) => (
+      <div
+        key={cert.name}
+        className="glass-card rounded-2xl p-5 flex flex-col gap-2"
+      >
+        <p className="font-medium text-white text-sm leading-snug">
+          {cert.name}
+        </p>
+
+        <div className="flex items-center justify-between mt-1">
+          <span className="text-cyan-400 text-xs">
+            {cert.issuer}
+          </span>
+          <span className="text-gray-500 text-xs bg-white/5 px-3 py-1 rounded-full">
+            {cert.year}
+          </span>
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
 {/* ACHIEVEMENTS */}
 <section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
 
