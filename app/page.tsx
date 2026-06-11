@@ -458,20 +458,42 @@ export default function Home() {
     {certifications.map((cert) => (
       <div
         key={cert.name}
-        className="glass-card rounded-2xl p-5 flex flex-col gap-2"
+        className="rounded-2xl p-5 flex flex-col gap-3 transition-all duration-300 hover:-translate-y-1"
+        style={{
+          background: "rgba(34,211,238,0.04)",
+          border: "1px solid rgba(34,211,238,0.12)",
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = "rgba(34,211,238,0.08)";
+          e.currentTarget.style.borderColor = "rgba(34,211,238,0.3)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = "rgba(34,211,238,0.04)";
+          e.currentTarget.style.borderColor = "rgba(34,211,238,0.12)";
+        }}
       >
-        <p className="font-medium text-white text-sm leading-snug">
+        <div className="flex items-center justify-between">
+          <span
+            className="text-xs font-semibold rounded-full px-3 py-1"
+            style={{
+              background: "#cffafe",
+              color: "#0e7490",
+              letterSpacing: "0.05em",
+            }}
+          >
+            CERTIFIED
+          </span>
+          <span className="text-xs text-gray-500">{cert.year}</span>
+        </div>
+
+        <p className="text-sm font-medium text-slate-200 leading-snug">
           {cert.name}
         </p>
 
-        <div className="flex items-center justify-between mt-1">
-          <span className="text-cyan-400 text-xs">
-            {cert.issuer}
-          </span>
-          <span className="text-gray-500 text-xs bg-white/5 px-3 py-1 rounded-full">
-            {cert.year}
-          </span>
-        </div>
+        <span className="text-xs text-slate-400 flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l18 0"/><path d="M9 8l1 0"/><path d="M9 12l1 0"/><path d="M9 16l1 0"/><path d="M14 8l1 0"/><path d="M14 12l1 0"/><path d="M14 16l1 0"/><path d="M5 21l0 -16a2 2 0 0 1 2 -2l10 0a2 2 0 0 1 2 2l0 16"/></svg>
+          {cert.issuer}
+        </span>
       </div>
     ))}
   </div>
