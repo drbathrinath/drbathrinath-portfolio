@@ -1,10 +1,25 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
-
+import { motion, useInView } from "framer-motion";
+import { useState, useRef } from "react";
+function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
+  
 
   const certifications = [
   { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
