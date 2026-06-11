@@ -196,7 +196,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="mx-auto max-w-6xl px-6 py-24">
+      <AnimatedSection><section id="about" className="mx-auto max-w-6xl px-6 py-24">
         <div className="glass-card rounded-3xl p-10">
           <h2 className="mb-6 text-3xl font-bold">About Me</h2>
           <p className="text-gray-300 leading-8 text-justify">
@@ -207,7 +207,7 @@ export default function Home() {
         </div>
       </section>
 {/* SKILLS */}
-<section id="skills" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection><section id="skills" className="mx-auto max-w-6xl px-6 pb-24">
 
   <div className="mb-12 text-center">
     <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
@@ -252,7 +252,7 @@ export default function Home() {
 </section>
 
 {/* EDUCATION */}
-<section id="education" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection><section id="education" className="mx-auto max-w-6xl px-6 pb-24">
 
   <div className="mb-12 text-center">
     <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
@@ -301,7 +301,7 @@ export default function Home() {
 
 </section>
 {/* EXPERIENCE */}
-<section id="experience" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection><section id="experience" className="mx-auto max-w-6xl px-6 pb-24">
 
   <div className="mb-12 text-center">
     <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
@@ -409,7 +409,7 @@ export default function Home() {
 
 </section>
      {/* PUBLICATIONS */}
-<section id="publications" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection><section id="publications" className="mx-auto max-w-6xl px-6 pb-24">
 
   <h2 className="mb-4 text-center text-3xl font-bold">
     Research Publications
@@ -464,7 +464,7 @@ export default function Home() {
 </section>
 
       {/* CERTIFICATIONS */}
-<section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection></AnimatedSection><AnimatedSection><section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
   <h2 className="mb-8 text-center text-3xl font-bold">
     Certifications
   </h2>
@@ -514,7 +514,7 @@ export default function Home() {
   </div>
 </section>
 {/* ACHIEVEMENTS */}
-<section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
+</AnimatedSection><AnimatedSection><section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
 
   <div className="mb-12 text-center">
     <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">
@@ -572,7 +572,7 @@ export default function Home() {
 
 </section>
       {/* CONNECT */}
-      <section id="connect" className="mx-auto max-w-6xl px-6 pb-24">
+      </AnimatedSection><AnimatedSection><section id="connect" className="mx-auto max-w-6xl px-6 pb-24">
         <div className="glass-card rounded-3xl p-10 text-center">
 
           <h2 className="mb-6 text-3xl font-bold">Let's Connect</h2>
@@ -599,6 +599,6 @@ export default function Home() {
         </div>
       </section>
 
-    </main>
+    </section></AnimatedSection></main>
   );
 }
