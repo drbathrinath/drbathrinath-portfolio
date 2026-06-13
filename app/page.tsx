@@ -61,13 +61,13 @@ function HeroButton({
   external?: boolean;
 }) {
   const base =
-    "relative inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 overflow-hidden group";
+    "relative inline-flex min-w-[10.5rem] items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 group sm:rounded-2xl sm:px-8 sm:py-4";
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 text-black shadow-[0_0_24px_rgba(34,211,238,0.35)] hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:scale-105 hover:-translate-y-0.5",
+      "bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 text-slate-950 shadow-[0_0_20px_rgba(34,211,238,0.28)] hover:shadow-[0_0_32px_rgba(34,211,238,0.48)] hover:scale-105 hover:-translate-y-0.5",
     secondary:
-  "bg-gradient-to-r from-slate-800 to-slate-700 text-white border border-cyan-400/40 shadow-[0_0_20px_rgba(34,211,238,0.15)] hover:shadow-[0_0_35px_rgba(34,211,238,0.35)] hover:scale-105 hover:-translate-y-0.5",
+      "bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/80 text-cyan-50 border border-cyan-300/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_18px_rgba(34,211,238,0.14)] hover:border-cyan-300/65 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_28px_rgba(34,211,238,0.28)] hover:scale-105 hover:-translate-y-0.5",
     ghost:
       "bg-[#0f1a2e] border border-white/10 text-white hover:border-cyan-500/50 hover:bg-[#0f2233] hover:shadow-[0_0_28px_rgba(34,211,238,0.18)] hover:scale-105 hover:-translate-y-0.5",
   };
@@ -146,16 +146,16 @@ export default function Home() {
         </div>
       </motion.nav>
 
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-16 pb-16">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-14 pb-14 sm:px-6 sm:pt-16 sm:pb-16">
         <div className="hero-glow hero-glow-left" />
         <div className="hero-glow hero-glow-right" />
 
-        <div className="glass-card mx-auto w-full max-w-6xl rounded-3xl p-10 text-center md:p-16">
+        <div className="glass-card mx-auto w-full max-w-6xl rounded-2xl p-4 text-center sm:rounded-3xl sm:p-8 md:p-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-6 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-5 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-cyan-300"
+            className="mb-5 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-[0.68rem] font-semibold tracking-[0.12em] uppercase text-cyan-300 sm:mb-6 sm:px-5 sm:text-xs sm:tracking-[0.18em]"
           >
             Drug Safety · Pharmacovigilance · Clinical Research
           </motion.span>
@@ -167,19 +167,20 @@ export default function Home() {
             className="mb-3 select-none"
           >
             <h1
-  className="leading-none font-black tracking-tight"
-  style={{
-    fontSize: "clamp(2.2rem, 7vw, 5.5rem)",
-    background:
-      "linear-gradient(135deg, #ffffff 0%, #e0f7ff 35%, #22d3ee 65%, #3b82f6 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    letterSpacing: "-0.02em",
-  }}
->
-  Dr. BATHRINATH M S
-</h1>
+              className="leading-none font-black"
+              style={{
+                fontSize: "clamp(1.42rem, 6.8vw, 5.5rem)",
+                background:
+                  "linear-gradient(135deg, #ffffff 0%, #e0f7ff 36%, #22d3ee 68%, #3b82f6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                letterSpacing: "0",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Dr. BATHRINATH M S
+            </h1>
           </motion.div>
 
           <motion.div
@@ -213,7 +214,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.82 }}
-            className="mt-10 flex flex-wrap justify-center gap-4"
+            className="mt-9 flex flex-wrap justify-center gap-3 sm:mt-10 sm:gap-4"
           >
             <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="secondary" external>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
