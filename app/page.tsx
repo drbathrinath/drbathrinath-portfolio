@@ -75,20 +75,22 @@ function HeroButton({
   const isExternal = external;
 
   return (
-  <a
-    href={href}
-    target={isExternal ? "_blank" : undefined}
-    rel={isExternal ? "noopener noreferrer" : undefined}
-    className={`${base} ${variants[variant]}`}
-  >
-    <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-    {children}
-  </a>
-);
+    <a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      className={`${base} ${variants[variant]}`}
+    >
+      <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {children}
+    </a>
+  );
 }
 
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const isLight = theme === "light";
 
   const certifications = [
     { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
@@ -120,12 +122,55 @@ export default function Home() {
     },
   ];
 
+  const schoolEducation = [
+    {
+      title: "12th Board (HSE)",
+      period: "2019 - 2020",
+      school: "Sri Vivekananda Hr. Sec. School - Kallakurichi, Tamil Nadu",
+      score: "88th Percentile",
+    },
+    {
+      title: "10th Board (SSLC)",
+      period: "2017 - 2018",
+      school: "Sri Vivekananda Hr. Sec. School - Kallakurichi, Tamil Nadu",
+      score: "95th Percentile",
+    },
+  ];
+
   return (
-    <main className="min-h-screen text-white">
+    <main className={`portfolio-shell min-h-screen text-white ${isLight ? "theme-light" : "theme-dark"}`}>
       <div
         onMouseEnter={() => setShowNavbar(true)}
         className="fixed top-0 left-0 z-[60] h-2 w-full"
       />
+      <button
+        type="button"
+        onClick={() => setTheme(isLight ? "dark" : "light")}
+        aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+        aria-pressed={isLight}
+        className="theme-toggle fixed top-4 right-4 z-[70] inline-flex h-11 items-center gap-2 rounded-full border px-3 text-xs font-semibold transition-all duration-300"
+      >
+        <span className="theme-toggle-icon" aria-hidden="true">
+          {isLight ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+          )}
+        </span>
+        {isLight ? "Dark" : "Light"}
+      </button>
       <motion.nav
         onMouseLeave={() => setShowNavbar(false)}
         initial={{ y: -100 }}
@@ -171,12 +216,13 @@ export default function Home() {
               style={{
                 fontSize: "clamp(1.42rem, 6.8vw, 5.5rem)",
                 background:
-                  "linear-gradient(135deg, #ffffff 0%, #e0f7ff 36%, #22d3ee 68%, #3b82f6 100%)",
+                  "linear-gradient(135deg, #f8fdff 0%, #f8fdff 30%, #d9fbff 48%, #22d3ee 72%, #3b82f6 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
                 letterSpacing: "0",
                 whiteSpace: "nowrap",
+                filter: "drop-shadow(0 1px 2px rgba(255,255,255,0.18))",
               }}
             >
               Dr. BATHRINATH M S
@@ -318,6 +364,18 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold">Doctor of Pharmacy (Pharm.D)</h3>
                 <p className="mt-2 text-cyan-400">Annamalai University, FEAT - Chidambaram</p>
                 <p className="mt-2 text-gray-400">Pharmacovigilance • Clinical Research • Clinical Pharmacy</p>
+              </div>
+              <div className="mb-10 grid gap-4 md:grid-cols-2">
+                {schoolEducation.map((item) => (
+                  <div key={item.title} className="education-card rounded-2xl p-5">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-lg font-semibold">{item.title}</h3>
+                      <span className="text-xs font-semibold text-cyan-300">{item.period}</span>
+                    </div>
+                    <p className="mt-3 text-sm text-gray-300">{item.school}</p>
+                    <p className="mt-3 text-2xl font-bold text-cyan-400">{item.score}</p>
+                  </div>
+                ))}
               </div>
               <div>
                 <h3 className="text-xl font-semibold">Professional Focus</h3>
