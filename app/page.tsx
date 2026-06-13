@@ -49,12 +49,50 @@ function StaggerItem({ children, className = "" }: { children: React.ReactNode; 
   );
 }
 
+function HeroButton({
+  href,
+  children,
+  variant = "ghost",
+  external = false,
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "ghost";
+  external?: boolean;
+}) {
+  const base =
+    "relative inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 overflow-hidden group";
+
+  const variants = {
+    primary:
+      "bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 text-black shadow-[0_0_24px_rgba(34,211,238,0.35)] hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:scale-105 hover:-translate-y-0.5",
+    secondary:
+      "border border-cyan-500/40 bg-white/5 text-white backdrop-blur-sm hover:bg-cyan-500/10 hover:border-cyan-400/70 hover:shadow-[0_0_28px_rgba(34,211,238,0.2)] hover:scale-105 hover:-translate-y-0.5",
+    ghost:
+      "bg-[#0f1a2e] border border-white/10 text-white hover:border-cyan-500/50 hover:bg-[#0f2233] hover:shadow-[0_0_28px_rgba(34,211,238,0.18)] hover:scale-105 hover:-translate-y-0.5",
+  };
+
+  const isExternal = external;
+
+  return (
+    
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      className={`${base} ${variants[variant]}`}
+    >
+      <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {children}
+    </a>
+  );
+}
+
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
 
   const certifications = [
     { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
-    { name: "Introduction to Pharmacovigilance", issuer: "PharmUni – Zaman Pharma", year: "2026" },
+    { name: "Introduction to Pharmacovigilance", issuer: "PharmUni - Zaman Pharma", year: "2026" },
     { name: "IMP Management", issuer: "NIHR", year: "2026" },
     { name: "Introduction to Decentralised Trials", issuer: "NIHR", year: "2026" },
     { name: "Clinical Data Management", issuer: "Medclinigen", year: "2026" },
@@ -81,9 +119,9 @@ export default function Home() {
       skills: ["Microsoft Excel", "Literature Review", "Scientific Documentation", "Data Analysis"],
     },
   ];
+
   return (
     <main className="min-h-screen text-white">
-
       <div
         onMouseEnter={() => setShowNavbar(true)}
         className="fixed top-0 left-0 z-[60] h-2 w-full"
@@ -98,59 +136,81 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="text-lg font-bold tracking-wide">Dr. BATHRINATH M S</a>
           <div className="hidden items-center gap-8 md:flex">
-            <a href="#about" className="hover:text-cyan-400">About</a>
-            <a href="#skills" className="hover:text-cyan-400">Skills</a>
-            <a href="#experience" className="hover:text-cyan-400">Experience</a>
-            <a href="#education" className="hover:text-cyan-400">Education</a>
-            <a href="#publications" className="hover:text-cyan-400">Publications</a>
-            <a href="#certifications" className="hover:text-cyan-400">Certifications</a>
-            <a href="#achievements" className="hover:text-cyan-400">Achievements</a>
-            <a href="#connect" className="hover:text-cyan-400">Connect</a>
+            {["about","skills","experience","education","publications","certifications","achievements","connect"].map(s => (
+              <a key={s} href={`#${s}`} className="capitalize hover:text-cyan-400 transition-colors">{s}</a>
+            ))}
           </div>
-          <a href="https://www.linkedin.com/in/drbathrinath" target="_blank"
-            className="rounded-xl bg-cyan-500 px-5 py-2 font-semibold text-black hover:scale-105 transition">
+          <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="primary" external>
             LinkedIn
-          </a>
+          </HeroButton>
         </div>
       </motion.nav>
 
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-16 pb-16">
         <div className="hero-glow hero-glow-left" />
         <div className="hero-glow hero-glow-right" />
-        <div className="glass-card mx-auto w-full max-w-6xl rounded-3xl p-10 text-center md:p-16">
 
+        <div className="glass-card mx-auto w-full max-w-6xl rounded-3xl p-10 text-center md:p-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-sm"
+            className="mb-6 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-5 py-2 text-xs font-semibold tracking-[0.18em] uppercase text-cyan-300"
           >
-            Drug Safety • Pharmacovigilance • Clinical Research
+            Drug Safety · Pharmacovigilance · Clinical Research
           </motion.span>
 
-          <motion.h1
-            initial={{ opacity: 0, scale: 0.75 }}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.82 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="glow-text mb-6 text-3xl font-bold sm:text-5xl md:text-7xl"
+            transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-3 select-none"
           >
-            Dr. BATHRINATH M S
-          </motion.h1>
+            <span
+              className="block text-xl font-light tracking-[0.35em] uppercase text-cyan-300/80 mb-1"
+              style={{ fontVariantCaps: "small-caps", letterSpacing: "0.4em" }}
+            >
+              Dr.
+            </span>
+            <h1
+              className="leading-none font-black tracking-tight"
+              style={{
+                fontSize: "clamp(2.6rem, 7vw, 5.5rem)",
+                background: "linear-gradient(135deg, #ffffff 0%, #e0f7ff 35%, #22d3ee 65%, #3b82f6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                textShadow: "none",
+                filter: "drop-shadow(0 0 28px rgba(34,211,238,0.35)) drop-shadow(0 0 60px rgba(59,130,246,0.2))",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              BATHRINATH M S
+            </h1>
+          </motion.div>
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.6, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto mb-7 h-px w-48 origin-center"
+            style={{ background: "linear-gradient(90deg, transparent, #22d3ee, #3b82f6, transparent)" }}
+          />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="text-lg text-gray-300 md:text-2xl"
+            transition={{ duration: 0.5, delay: 0.55 }}
+            className="text-lg text-gray-300 md:text-xl font-medium"
           >
-            Pharmacovigilance Professional Focused on Drug Safety & Clinical Research
+            Pharmacovigilance Professional — Drug Safety & Clinical Research
           </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.65 }}
-            className="mx-auto mt-6 max-w-3xl text-gray-400"
+            transition={{ duration: 0.5, delay: 0.68 }}
+            className="mx-auto mt-4 max-w-2xl text-gray-400 text-sm leading-7"
           >
             Pharm.D graduate with hands-on experience in Pharmacovigilance, Drug Safety,
             Clinical Research, Regulatory Compliance, and Clinical Operations.
@@ -159,27 +219,35 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.5, delay: 0.82 }}
             className="mt-10 flex flex-wrap justify-center gap-4"
           >
-            <a href="https://www.linkedin.com/in/drbathrinath" target="_blank"
-              className="rounded-xl bg-blue-600 px-6 py-3 font-semibold hover:bg-blue-700">
+            <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="ghost" external>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
               LinkedIn
-            </a>
-            <a href="#connect"
-              className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-110 hover:shadow-cyan-400/50">
+            </HeroButton>
+
+            <HeroButton href="#connect" variant="primary">
               Contact Me
-            </a>
-            <a href="/resume.pdf" target="_blank"
-              className="rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black hover:scale-105 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </HeroButton>
+
+            <HeroButton href="/resume.pdf" variant="secondary" external>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+              </svg>
               View Resume
-            </a>
+            </HeroButton>
           </motion.div>
 
           <motion.div
             initial="hidden"
             animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.15, delayChildren: 1.0 } } }}
+            variants={{ visible: { transition: { staggerChildren: 0.15, delayChildren: 1.05 } } }}
             className="mt-12 grid gap-6 md:grid-cols-3"
           >
             {[
@@ -196,13 +264,13 @@ export default function Home() {
                 className="glass-card rounded-2xl p-6"
               >
                 <h3 className="text-3xl font-bold text-cyan-400">{item.value}</h3>
-                <p className="mt-2 text-gray-400">{item.label}</p>
+                <p className="mt-2 text-gray-400 text-sm">{item.label}</p>
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </section>
+
       <section id="about" className="mx-auto max-w-6xl px-6 py-24">
         <SlideUp>
           <div className="glass-card rounded-3xl p-10">
@@ -210,7 +278,7 @@ export default function Home() {
             <p className="text-gray-300 leading-8 text-justify">
               I am a Pharm.D graduate with strong grounding in Pharmacovigilance,
               Drug Safety, and Clinical Research. I have documented real-world ADRs including
-              a Grade III Anaphylaxis SAE escalated per ICH E2A, hold multiple industry
+              a Grade II A Anaphylaxis SAE escalated per ICH E2A, hold multiple industry
               certifications, and have two peer-reviewed publications.
             </p>
           </div>
@@ -254,7 +322,7 @@ export default function Home() {
             <div className="border-l-2 border-cyan-500 pl-8">
               <div className="mb-10">
                 <h3 className="text-2xl font-semibold">Doctor of Pharmacy (Pharm.D)</h3>
-                <p className="mt-2 text-cyan-400">Annamalai University, FEAT – Chidambaram</p>
+                <p className="mt-2 text-cyan-400">Annamalai University, FEAT - Chidambaram</p>
                 <p className="mt-2 text-gray-400">Pharmacovigilance • Clinical Research • Clinical Pharmacy</p>
               </div>
               <div>
@@ -279,7 +347,7 @@ export default function Home() {
             <div className="glass-card rounded-3xl p-8">
               <h3 className="text-2xl font-bold">Pharm.D Final Year Internship</h3>
               <p className="mt-2 text-cyan-400">Government Cuddalore Medical College & Hospital</p>
-              <p className="mt-1 text-gray-500">Aug 2025 – Aug 2026</p>
+              <p className="mt-1 text-gray-500">Aug 2025 - Aug 2026</p>
               <ul className="mt-6 space-y-3 text-gray-300">
                 <li>• Documented and managed 15 Adverse Drug Reactions (ADRs)</li>
                 <li>• Performed WHO-UMC causality assessments</li>
@@ -295,7 +363,7 @@ export default function Home() {
             <div className="glass-card rounded-3xl p-8">
               <h3 className="text-2xl font-bold">Academic Clinical Clerkship</h3>
               <p className="mt-2 text-cyan-400">Government Cuddalore Medical College & Hospital</p>
-              <p className="mt-1 text-gray-500">Jul 2024 – Jul 2025</p>
+              <p className="mt-1 text-gray-500">Jul 2024 - Jul 2025</p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {["General Medicine","Surgery","Pediatrics","Obstetrics & Gynaecology","Psychiatry","Pulmonology","Orthopaedics","ENT","Ophthalmology","Dermatology","DVL"].map((dept) => (
                   <span key={dept} className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">{dept}</span>
@@ -319,7 +387,7 @@ export default function Home() {
               <p className="mb-6 text-gray-400">VVI Journal • Vol 13 • Issue 5 • 2025</p>
               <a href="https://vvijournal.com/volume-13-issue-5-2025/" target="_blank" rel="noopener noreferrer"
                 className="inline-block rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-105">
-                View Publication →
+                View Publication
               </a>
             </div>
           </StaggerItem>
@@ -331,12 +399,13 @@ export default function Home() {
               <p className="mb-6 text-gray-400">IJISRT • Vol 10 • Issue 8 • Aug 2025</p>
               <a href="https://doi.org/10.38124/ijisrt/25aug1277" target="_blank" rel="noopener noreferrer"
                 className="inline-block rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 font-semibold text-white shadow-lg shadow-cyan-500/30 transition duration-300 hover:scale-105">
-                View Publication →
+                View Publication
               </a>
             </div>
           </StaggerItem>
         </StaggerGrid>
       </section>
+
       <section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
         <SlideUp>
           <h2 className="mb-8 text-center text-3xl font-bold">Certifications</h2>
@@ -387,8 +456,8 @@ export default function Home() {
           {[
             { value: "88th Percentile", label: "Medclinigen National Clinical Research Talent Assessment" },
             { value: "87.5th Percentile", label: "Clinical Data Management Talent Assessment" },
-            { value: "Stanford Medicine CME", label: "Hypertension in Primary Care — AMA PRA Category 1 Credit" },
-            { value: "Guinness World Record", label: "Contributor — Cipla #PharmacistFightsAMR Campaign" },
+            { value: "Stanford Medicine CME", label: "Hypertension in Primary Care - AMA PRA Category 1 Credit" },
+            { value: "Guinness World Record", label: "Contributor - Cipla #PharmacistFightsAMR Campaign" },
           ].map((item) => (
             <StaggerItem key={item.value}>
               <div className="glass-card rounded-3xl p-8">
@@ -403,16 +472,16 @@ export default function Home() {
       <section id="connect" className="mx-auto max-w-6xl px-6 pb-24">
         <SlideUp>
           <div className="glass-card rounded-3xl p-10 text-center">
-            <h2 className="mb-6 text-3xl font-bold">Let's Connect</h2>
+            <h2 className="mb-6 text-3xl font-bold">Let us Connect</h2>
             <p className="mb-6 text-gray-300">
               Interested in Pharmacovigilance, Drug Safety, Clinical Research, or Collaboration Opportunities.
             </p>
             <div className="space-y-2 text-gray-300">
-              <p>📍 Chennai, India</p>
-              <p>📧 bathrinathshanmugam7@gmail.com</p>
-              <p>📱 +91 90425 11773</p>
+              <p>Chennai, India</p>
+              <p>bathrinathshanmugam7@gmail.com</p>
+              <p>+91 90425 11773</p>
             </div>
-            <a href="https://www.linkedin.com/in/drbathrinath" target="_blank"
+            <a href="https://www.linkedin.com/in/drbathrinath" target="_blank" rel="noopener noreferrer"
               className="mt-8 inline-block rounded-xl bg-cyan-500 px-6 py-3 font-semibold text-black hover:scale-105 transition">
               Connect on LinkedIn
             </a>
