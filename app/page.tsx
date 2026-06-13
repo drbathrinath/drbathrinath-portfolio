@@ -151,10 +151,12 @@ export default function Home() {
   const education = [
     {
       title: "Doctor of Pharmacy (Pharm.D)",
+      period: "2020 - 2026",
       school: "Annamalai University, FEAT - Chidambaram",
     },
     {
       title: "Advanced Diploma in Clinical Research",
+      period: "Mar 2026 - Aug 2026",
       school: "CliniLaunch Research Institute - Bangalore",
     },
     {
