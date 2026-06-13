@@ -61,13 +61,13 @@ function HeroButton({
   external?: boolean;
 }) {
   const base =
-    "relative inline-flex items-center justify-center gap-2 rounded-2xl px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 overflow-hidden group";
+    "relative inline-flex items-center justify-center gap-2 rounded-2xl px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 overflow-hidden group";
 
   const variants = {
     primary:
       "bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 text-black shadow-[0_0_24px_rgba(34,211,238,0.35)] hover:shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:scale-105 hover:-translate-y-0.5",
     secondary:
-      "border border-cyan-500/40 bg-white/5 text-white backdrop-blur-sm hover:bg-cyan-500/10 hover:border-cyan-400/70 hover:shadow-[0_0_28px_rgba(34,211,238,0.2)] hover:scale-105 hover:-translate-y-0.5",
+  "bg-gradient-to-r from-slate-800 to-slate-700 text-white border border-cyan-400/40 shadow-[0_0_20px_rgba(34,211,238,0.15)] hover:shadow-[0_0_35px_rgba(34,211,238,0.35)] hover:scale-105 hover:-translate-y-0.5",
     ghost:
       "bg-[#0f1a2e] border border-white/10 text-white hover:border-cyan-500/50 hover:bg-[#0f2233] hover:shadow-[0_0_28px_rgba(34,211,238,0.18)] hover:scale-105 hover:-translate-y-0.5",
   };
@@ -166,27 +166,20 @@ export default function Home() {
             transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="mb-3 select-none"
           >
-            <span
-              className="block text-xl font-light tracking-[0.35em] uppercase text-cyan-300/80 mb-1"
-              style={{ fontVariantCaps: "small-caps", letterSpacing: "0.4em" }}
-            >
-              Dr.
-            </span>
             <h1
-              className="leading-none font-black tracking-tight"
-              style={{
-                fontSize: "clamp(2.6rem, 7vw, 5.5rem)",
-                background: "linear-gradient(135deg, #ffffff 0%, #e0f7ff 35%, #22d3ee 65%, #3b82f6 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                textShadow: "none",
-                filter: "drop-shadow(0 0 28px rgba(34,211,238,0.35)) drop-shadow(0 0 60px rgba(59,130,246,0.2))",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              BATHRINATH M S
-            </h1>
+  className="leading-none font-black tracking-tight"
+  style={{
+    fontSize: "clamp(2.2rem, 7vw, 5.5rem)",
+    background:
+      "linear-gradient(135deg, #ffffff 0%, #e0f7ff 35%, #22d3ee 65%, #3b82f6 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
+    letterSpacing: "-0.02em",
+  }}
+>
+  Dr. BATHRINATH M S
+</h1>
           </motion.div>
 
           <motion.div
@@ -222,7 +215,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.82 }}
             className="mt-10 flex flex-wrap justify-center gap-4"
           >
-            <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="ghost" external>
+            <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="secondary" external>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
               </svg>
