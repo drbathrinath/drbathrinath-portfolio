@@ -75,16 +75,16 @@ function HeroButton({
   const isExternal = external;
 
   return (
-    
-      href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      className={`${base} ${variants[variant]}`}
-    >
-      <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-      {children}
-    </a>
-  );
+  <a
+    href={href}
+    target={isExternal ? "_blank" : undefined}
+    rel={isExternal ? "noopener noreferrer" : undefined}
+    className={`${base} ${variants[variant]}`}
+  >
+    <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+    {children}
+  </a>
+);
 }
 
 export default function Home() {
