@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function SlideUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -90,7 +90,33 @@ function HeroButton({
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const isInitialThemeSync = useRef(true);
   const isLight = theme === "light";
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    const preferredTheme =
+      savedTheme === "dark" || savedTheme === "light"
+        ? savedTheme
+        : window.matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
+
+    document.documentElement.dataset.theme = preferredTheme;
+    document.documentElement.style.colorScheme = preferredTheme;
+    queueMicrotask(() => setTheme(preferredTheme));
+  }, []);
+
+  useEffect(() => {
+    if (isInitialThemeSync.current) {
+      isInitialThemeSync.current = false;
+      return;
+    }
+
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
 
   const certifications = [
     { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
@@ -122,7 +148,15 @@ export default function Home() {
     },
   ];
 
-  const schoolEducation = [
+  const education = [
+    {
+      title: "Doctor of Pharmacy (Pharm.D)",
+      school: "Annamalai University, FEAT - Chidambaram",
+    },
+    {
+      title: "Advanced Diploma in Clinical Research",
+      school: "CliniLaunch Research Institute - Bangalore",
+    },
     {
       title: "12th Board (HSE)",
       period: "2019 - 2020",
@@ -211,21 +245,9 @@ export default function Home() {
             transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="mb-3 select-none"
           >
-            <h1
-              className="leading-none font-black"
-              style={{
-                fontSize: "clamp(1.42rem, 6.8vw, 5.5rem)",
-                background:
-                  "linear-gradient(135deg, #f8fdff 0%, #f8fdff 30%, #d9fbff 48%, #22d3ee 72%, #3b82f6 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                letterSpacing: "0",
-                whiteSpace: "nowrap",
-                filter: "drop-shadow(0 1px 2px rgba(255,255,255,0.18))",
-              }}
-            >
-              Dr. BATHRINATH M S
+            <h1 className="hero-name font-black">
+              <span className="hero-name-accent">Dr. BATHRINATH</span>
+              <span className="hero-name-rest">M S</span>
             </h1>
           </motion.div>
 
@@ -359,30 +381,27 @@ export default function Home() {
         </SlideUp>
         <SlideUp delay={0.1}>
           <div className="glass-card rounded-3xl p-10">
-            <div className="border-l-2 border-cyan-500 pl-8">
-              <div className="mb-10">
-                <h3 className="text-2xl font-semibold">Doctor of Pharmacy (Pharm.D)</h3>
-                <p className="mt-2 text-cyan-400">Annamalai University, FEAT - Chidambaram</p>
-                <p className="mt-2 text-gray-400">Pharmacovigilance • Clinical Research • Clinical Pharmacy</p>
-              </div>
-              <div className="mb-10 grid gap-4 md:grid-cols-2">
-                {schoolEducation.map((item) => (
-                  <div key={item.title} className="education-card rounded-2xl p-5">
+            <div className="border-l-2 border-cyan-500 pl-5 sm:pl-8">
+              <div className="grid gap-4">
+                {education.map((item, index) => (
+                  <div key={item.title} className="education-card rounded-2xl p-5 sm:p-6">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <span className="text-xs font-semibold text-cyan-300">{item.period}</span>
+                      <div className="flex items-center gap-3">
+                        <span className="education-number" aria-hidden="true">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className="text-lg font-semibold sm:text-xl">{item.title}</h3>
+                      </div>
+                      {item.period && (
+                        <span className="text-xs font-semibold text-cyan-300">{item.period}</span>
+                      )}
                     </div>
-                    <p className="mt-3 text-sm text-gray-300">{item.school}</p>
-                    <p className="mt-3 text-2xl font-bold text-cyan-400">{item.score}</p>
+                    <p className="mt-3 text-sm text-gray-300 sm:ml-12">{item.school}</p>
+                    {item.score && (
+                      <p className="mt-3 text-2xl font-bold text-cyan-400 sm:ml-12">{item.score}</p>
+                    )}
                   </div>
                 ))}
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold">Professional Focus</h3>
-                <p className="mt-2 text-gray-400 leading-7">
-                  Developed strong foundations in drug safety, adverse event monitoring, clinical research,
-                  patient care, regulatory compliance, literature evaluation, and evidence-based medicine.
-                </p>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@
 :root {
   --background: #050816;
   --foreground: #ffffff;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -28,6 +29,15 @@ body {
     #050816,
     #0a1020
   );
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="light"] body {
+  background: #f8fbff;
 }
 
 .portfolio-shell {
@@ -96,6 +106,28 @@ body {
   background: rgba(34, 211, 238, 0.06);
   border: 1px solid rgba(34, 211, 238, 0.16);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.education-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(34, 211, 238, 0.38);
+  background: rgba(34, 211, 238, 0.09);
+}
+
+.education-number {
+  display: inline-flex;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  color: #67e8f9;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
 }
 
 .theme-light .glass-card {
@@ -123,6 +155,17 @@ body {
 .theme-light .education-card {
   background: rgba(236, 254, 255, 0.72);
   border-color: rgba(14, 116, 144, 0.18);
+}
+
+.theme-light .education-card:hover {
+  background: rgba(224, 247, 250, 0.9);
+  border-color: rgba(14, 116, 144, 0.34);
+}
+
+.theme-light .education-number {
+  background: rgba(14, 116, 144, 0.1);
+  border-color: rgba(14, 116, 144, 0.2);
+  color: #0e7490;
 }
 
 .theme-light .text-slate-200 {
@@ -199,7 +242,79 @@ body {
   }
 }
 
+.hero-name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.08em 0.2em;
+  font-size: clamp(2rem, 6.8vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+}
+
+.hero-name-accent,
+.hero-name-rest {
+  display: inline-block;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-name-accent {
+  background-image: linear-gradient(
+    105deg,
+    #ecfeff 0%,
+    #67e8f9 24%,
+    #22d3ee 43%,
+    #ffffff 52%,
+    #38bdf8 63%,
+    #60a5fa 100%
+  );
+  background-size: 220% auto;
+  filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.32));
+  animation: nameShimmer 5s linear infinite;
+}
+
+.hero-name-rest {
+  background-image: linear-gradient(135deg, #f8fdff 15%, #bae6fd 58%, #60a5fa 100%);
+  filter: drop-shadow(0 2px 8px rgba(59, 130, 246, 0.2));
+}
+
+.theme-light .hero-name-accent {
+  background-image: linear-gradient(
+    105deg,
+    #0f172a 0%,
+    #0e7490 28%,
+    #0891b2 43%,
+    #2563eb 53%,
+    #0e7490 68%,
+    #0f172a 100%
+  );
+  background-size: 220% auto;
+  filter: drop-shadow(0 5px 14px rgba(14, 116, 144, 0.2));
+}
+
+.theme-light .hero-name-rest {
+  background-image: linear-gradient(135deg, #0f172a 10%, #164e63 55%, #2563eb 100%);
+  filter: none;
+}
+
+@keyframes nameShimmer {
+  0% {
+    background-position: 120% center;
+  }
+  100% {
+    background-position: -120% center;
+  }
+}
+
 @media (max-width: 640px) {
+  .hero-name {
+    font-size: clamp(2rem, 11.5vw, 3.25rem);
+    line-height: 1;
+  }
+
   .hero-glow {
     width: 240px;
     height: 240px;
@@ -214,6 +329,24 @@ body {
   .hero-glow-right {
     top: -130px;
     right: -130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hero-name-accent,
+  .hero-glow {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
