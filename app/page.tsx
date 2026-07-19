@@ -87,11 +87,84 @@ function HeroButton({
   );
 }
 
+function ResumeDropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handlePointerDown(event: MouseEvent | TouchEvent) {
+      if (!dropdownRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
+  }, []);
+
+  const resumeLinks = [
+    {
+      href: "/Bathrinath_MS_PharmD_Drug_Safety_Associate_Resume.pdf",
+      label: "Drug Safety Associate Resume",
+    },
+    {
+      href: "/Bathrinath_M_S_PharmD_Pharmacovigilance_Resume.pdf",
+      label: "Pharmacovigilance Associate Resume",
+    },
+  ];
+
+  return (
+    <div ref={dropdownRef} className="relative inline-flex justify-center">
+      <button
+        type="button"
+        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        className="relative inline-flex min-w-[10.5rem] items-center justify-center gap-2 overflow-hidden rounded-xl px-6 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 group sm:rounded-2xl sm:px-8 sm:py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-950/80 text-cyan-50 border border-cyan-300/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_18px_rgba(34,211,238,0.14)] hover:border-cyan-300/65 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_28px_rgba(34,211,238,0.28)] hover:scale-105 hover:-translate-y-0.5"
+      >
+        <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+        View Resume
+      </button>
+
+      {isOpen && (
+        <div
+          role="menu"
+          className="glass-card absolute top-full z-40 mt-3 w-[min(20rem,calc(100vw-2rem))] rounded-2xl p-2 text-left"
+        >
+          {resumeLinks.map((resume) => (
+            <a
+              key={resume.href}
+              href={resume.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              role="menuitem"
+              onClick={() => setIsOpen(false)}
+              className="block rounded-xl px-4 py-3 text-sm font-semibold text-gray-200 transition hover:bg-cyan-500/10 hover:text-cyan-300"
+            >
+              {resume.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(false);
   const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [showMobileNav, setShowMobileNav] = useState(false);
   const isInitialThemeSync = useRef(true);
   const isLight = theme === "light";
+  const navLinks = ["about","skills","experience","education","publications","presentations","certifications","achievements","connect"];
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("portfolio-theme");
@@ -275,17 +348,64 @@ export default function Home() {
         transition={{ duration: 0.25 }}
         className="glass-navbar fixed top-0 z-50 w-full"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <a href="#" className="text-lg font-bold tracking-wide">Dr. BATHRINATH M S</a>
-          <div className="hidden items-center gap-8 md:flex">
-            {["about","skills","experience","education","publications","presentations","certifications","achievements","connect"].map(s => (
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4">
+          <a href="#" className="min-w-0 flex-1 truncate whitespace-nowrap text-base font-bold tracking-wide sm:text-lg xl:flex-none">Dr. BATHRINATH M S</a>
+          <div className="hidden items-center gap-6 xl:flex">
+            {navLinks.map(s => (
               <a key={s} href={`#${s}`} className="capitalize hover:text-cyan-400 transition-colors">{s}</a>
             ))}
           </div>
-          <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="primary" external>
-            LinkedIn
-          </HeroButton>
+          <div className="hidden sm:block">
+            <HeroButton href="https://www.linkedin.com/in/drbathrinath" variant="primary" external>
+              LinkedIn
+            </HeroButton>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowMobileNav((current) => !current)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={showMobileNav}
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-cyan-300/35 bg-slate-900/70 text-cyan-50 transition hover:border-cyan-300/65 xl:hidden"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              {showMobileNav ? (
+                <>
+                  <path d="M18 6 6 18" />
+                  <path d="m6 6 12 12" />
+                </>
+              ) : (
+                <>
+                  <path d="M4 7h16" />
+                  <path d="M4 12h16" />
+                  <path d="M4 17h16" />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
+        {showMobileNav && (
+          <div className="mx-auto grid max-w-7xl gap-2 px-6 pb-5 xl:hidden">
+            {navLinks.map((s) => (
+              <a
+                key={s}
+                href={`#${s}`}
+                onClick={() => setShowMobileNav(false)}
+                className="rounded-xl border border-cyan-500/10 bg-cyan-500/5 px-4 py-2.5 text-sm font-semibold capitalize text-gray-200 transition hover:border-cyan-500/30 hover:text-cyan-300"
+              >
+                {s}
+              </a>
+            ))}
+            <a
+              href="https://www.linkedin.com/in/drbathrinath"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setShowMobileNav(false)}
+              className="rounded-xl border border-cyan-300/35 bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:scale-[1.01] sm:hidden"
+            >
+              LinkedIn
+            </a>
+          </div>
+        )}
       </motion.nav>
 
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-14 pb-14 sm:px-6 sm:pt-16 sm:pb-16">
@@ -361,19 +481,7 @@ export default function Home() {
               </svg>
             </HeroButton>
 
-            <HeroButton href="/Bathrinath_MS_PharmD_Drug_Safety_Associate_Resume.pdf" variant="secondary" external>
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-              </svg>
-              Drug Safety Associate Resume
-            </HeroButton>
-
-            <HeroButton href="/Bathrinath_M_S_PharmD_Pharmacovigilance_Resume.pdf" variant="secondary" external>
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
-              </svg>
-              Pharmacovigilance Associate Resume
-            </HeroButton>
+            <ResumeDropdown />
           </motion.div>
 
           <motion.div
@@ -552,9 +660,9 @@ export default function Home() {
         <SlideUp>
           <h2 className="mb-4 text-center text-3xl font-bold">Research Presentations</h2>
         </SlideUp>
-        <StaggerGrid className="grid gap-6 md:grid-cols-2 mt-8">
+        <StaggerGrid className="mt-8 flex justify-center">
           <StaggerItem>
-            <div className="glass-card rounded-3xl p-8">
+            <div className="glass-card max-w-2xl rounded-3xl p-8">
               <h3 className="mb-4 text-xl font-semibold">
                 Oral Paper Presentation - &quot;Evaluation of Post-Operative Pain Management Strategies in a Hemorrhoidectomy Patient in a Tertiary Care Teaching Hospital&quot;
               </h3>
@@ -610,7 +718,6 @@ export default function Home() {
 
       <section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
         <SlideUp className="mb-12 text-center">
-          <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">Achievements</p>
           <h2 className="text-4xl font-bold">Achievements</h2>
         </SlideUp>
         <StaggerGrid className="grid gap-6 md:grid-cols-2">
