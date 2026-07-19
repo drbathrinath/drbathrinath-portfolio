@@ -119,32 +119,82 @@ export default function Home() {
   }, [theme]);
 
   const certifications = [
-    { name: "GCP ICH E6(R3)", issuer: "NIHR", year: "2026" },
-    { name: "Introduction to Pharmacovigilance", issuer: "PharmUni - Zaman Pharma", year: "2026" },
-    { name: "IMP Management", issuer: "NIHR", year: "2026" },
-    { name: "Introduction to Decentralised Trials", issuer: "NIHR", year: "2026" },
-    { name: "Clinical Data Management", issuer: "Medclinigen", year: "2026" },
-    { name: "Ethical & Regulatory Aspects of Clinical Research", issuer: "NIH", year: "2026" },
-    { name: "Principles & Practice of Clinical Research", issuer: "NIH", year: "2026" },
-    { name: "GCP by NIDA CTN", issuer: "NIDA CTN", year: "2026" },
+    {
+      name: "Good Clinical Practice (ICH E6(R3))",
+      issuer: "NIHR Research Delivery Network",
+      year: "February 2026",
+    },
+    {
+      name: "Good Clinical Practice",
+      issuer: "NIDA Clinical Trials Network (NIH) | 11 Modules",
+      year: "May 2026",
+    },
+    {
+      name: "Introduction to the Principles and Practice of Clinical Research",
+      issuer: "National Institutes of Health (NIH)",
+      year: "2025-2026",
+    },
+    {
+      name: "Ethical and Regulatory Aspects of Clinical Research",
+      issuer: "National Institutes of Health (NIH)",
+      year: "2026",
+    },
+    {
+      name: "Introduction to Pharmacovigilance",
+      issuer: "Zamann Pharma Support GmbH (TUV SUD ISO 9001:2015 Certified)",
+      year: "February 2026",
+    },
+    {
+      name: "Good Clinical Practice - Investigational Medicinal Product (IMP) Management",
+      issuer: "NIHR Research Delivery Network",
+      year: "February 2026",
+    },
+    {
+      name: "NIHR Informed Consent Series (Adults Lacking Capacity, Children & Remote Consent)",
+      issuer: "NIHR Research Delivery Network",
+      year: "February 2026",
+    },
   ];
 
   const skillCategories = [
     {
+      title: "Pharmacovigilance",
+      skills: [
+        "ADR Monitoring",
+        "ICSR Processing",
+        "Case Intake & Case Triage",
+        "Seriousness Assessment",
+        "Expectedness Assessment",
+        "Causality Assessment (WHO-UMC & NARANJO SCALE)",
+      ],
+    },
+    {
       title: "Drug Safety",
-      skills: ["Adverse Event Reporting", "ICSR Processing", "Case Triage", "Signal Detection", "MedDRA Coding"],
+      skills: [
+        "MedDRA Coding Concepts",
+        "WHO Drug Dictionary Concepts",
+        "Safety Literature Screening",
+        "Signal Detection Concepts",
+      ],
     },
     {
       title: "Clinical Research",
-      skills: ["Good Clinical Practice (GCP)", "Clinical Trial Documentation", "Protocol Review", "Research Methodology", "Data Collection"],
+      skills: [
+        "Clinical Research",
+        "Regulatory Compliance",
+        "Patient Safety",
+        "Medical Terminology",
+      ],
     },
     {
-      title: "Regulatory",
-      skills: ["FDA Guidelines", "Pharmacovigilance Regulations", "Risk Management", "Regulatory Compliance"],
-    },
-    {
-      title: "Technical",
-      skills: ["Microsoft Excel", "Literature Review", "Scientific Documentation", "Data Analysis"],
+      title: "Technical and Research Tools",
+      skills: [
+        "Microsoft Excel",
+        "Microsoft Word",
+        "Microsoft PowerPoint",
+        "PubMed",
+        "Google Scholar",
+      ],
     },
   ];
 
@@ -170,6 +220,17 @@ export default function Home() {
       period: "2017 - 2018",
       school: "Sri Vivekananda Hr. Sec. School - Kallakurichi, Tamil Nadu",
       score: "95th Percentile",
+    },
+  ];
+
+  const achievements = [
+    {
+      value: "Merit - Clinical Research (90th percentile)",
+      label: "Medclinigen National Mock Talent Test, June 2026",
+    },
+    {
+      value: "Merit - Clinical Data Management (87.5th percentile)",
+      label: "Medclinigen National Mock Talent Test, April 2026",
     },
   ];
 
@@ -217,7 +278,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <a href="#" className="text-lg font-bold tracking-wide">Dr. BATHRINATH M S</a>
           <div className="hidden items-center gap-8 md:flex">
-            {["about","skills","experience","education","publications","certifications","achievements","connect"].map(s => (
+            {["about","skills","experience","education","publications","presentations","certifications","achievements","connect"].map(s => (
               <a key={s} href={`#${s}`} className="capitalize hover:text-cyan-400 transition-colors">{s}</a>
             ))}
           </div>
@@ -276,8 +337,8 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.68 }}
             className="mx-auto mt-4 max-w-2xl text-gray-400 text-sm leading-7"
           >
-            Pharm.D graduate with hands-on experience in Pharmacovigilance, Drug Safety,
-            Clinical Research, Regulatory Compliance, and Clinical Operations.
+            Pharm.D graduate with hands-on clinical exposure to ADR identification,
+            documentation, WHO-UMC and Naranjo causality assessment, medication review
           </motion.p>
 
           <motion.div
@@ -300,11 +361,18 @@ export default function Home() {
               </svg>
             </HeroButton>
 
-            <HeroButton href="/Bathrinath_Resume.pdf" variant="secondary" external>
+            <HeroButton href="/Bathrinath_MS_PharmD_Drug_Safety_Associate_Resume.pdf" variant="secondary" external>
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
               </svg>
-              View Resume
+              Drug Safety Associate Resume
+            </HeroButton>
+
+            <HeroButton href="/Bathrinath_M_S_PharmD_Pharmacovigilance_Resume.pdf" variant="secondary" external>
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Pharmacovigilance Associate Resume
             </HeroButton>
           </motion.div>
 
@@ -315,7 +383,7 @@ export default function Home() {
             className="mt-12 grid gap-6 md:grid-cols-3"
           >
             {[
-              { value: "2 Years", label: "Clinical Experience" },
+              { value: "2 Years", label: "Academic Clinical Experience" },
               { value: "15+", label: "ADRs Documented" },
               { value: "11", label: "Clinical Departments" },
             ].map((item) => (
@@ -340,10 +408,11 @@ export default function Home() {
           <div className="glass-card rounded-3xl p-10">
             <h2 className="mb-6 text-3xl font-bold">About Me</h2>
             <p className="text-gray-300 leading-8 text-justify">
-              I am a Pharm.D graduate with strong grounding in Pharmacovigilance,
-              Drug Safety, and Clinical Research. I have documented real-world ADRs including
-              a Grade II A Anaphylaxis SAE escalated per ICH E2A, hold multiple industry
-              certifications, and have two peer-reviewed publications.
+              Driven by one question: How can medicines be made safer for every patient?
+              <br />
+              As a Pharm.D graduate with exposure in Pharmacovigilance and Clinical
+              Research, I combine clinical experience, drug safety knowledge, and
+              research excellence to contribute to evidence-based healthcare
             </p>
           </div>
         </SlideUp>
@@ -479,6 +548,25 @@ export default function Home() {
         </StaggerGrid>
       </section>
 
+      <section id="presentations" className="mx-auto max-w-6xl px-6 pb-24">
+        <SlideUp>
+          <h2 className="mb-4 text-center text-3xl font-bold">Research Presentations</h2>
+        </SlideUp>
+        <StaggerGrid className="grid gap-6 md:grid-cols-2 mt-8">
+          <StaggerItem>
+            <div className="glass-card rounded-3xl p-8">
+              <h3 className="mb-4 text-xl font-semibold">
+                Oral Paper Presentation - &quot;Evaluation of Post-Operative Pain Management Strategies in a Hemorrhoidectomy Patient in a Tertiary Care Teaching Hospital&quot;
+              </h3>
+              <p className="mb-4 text-gray-400">
+                Trends in Pharmaceutical Sciences (TIPS&apos;25), National Conference, Department of Pharmacy, Annamalai University (APTI-TN Sponsored)
+              </p>
+              <p className="text-sm leading-7 text-gray-300">April 2025</p>
+            </div>
+          </StaggerItem>
+        </StaggerGrid>
+      </section>
+
       <section id="certifications" className="mx-auto max-w-6xl px-6 pb-24">
         <SlideUp>
           <h2 className="mb-8 text-center text-3xl font-bold">Certifications</h2>
@@ -522,16 +610,11 @@ export default function Home() {
 
       <section id="achievements" className="mx-auto max-w-6xl px-6 pb-24">
         <SlideUp className="mb-12 text-center">
-          <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">Recognition & Accomplishments</p>
+          <p className="mb-3 text-sm uppercase tracking-[0.25em] text-cyan-400">Achievements</p>
           <h2 className="text-4xl font-bold">Achievements</h2>
         </SlideUp>
         <StaggerGrid className="grid gap-6 md:grid-cols-2">
-          {[
-            { value: "88th Percentile", label: "Medclinigen National Clinical Research Talent Assessment" },
-            { value: "87.5th Percentile", label: "Clinical Data Management Talent Assessment" },
-            { value: "Stanford Medicine CME", label: "Hypertension in Primary Care - AMA PRA Category 1 Credit" },
-            { value: "Guinness World Record", label: "Contributor - Cipla #PharmacistFightsAMR Campaign" },
-          ].map((item) => (
+          {achievements.map((item) => (
             <StaggerItem key={item.value}>
               <div className="glass-card rounded-3xl p-8">
                 <h3 className="text-xl font-bold text-cyan-400">{item.value}</h3>
