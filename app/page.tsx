@@ -604,7 +604,6 @@ export default function Home() {
                 <li>• Applied Naranjo Scale for ADR evaluation</li>
                 <li>• Escalated 1 Grade III Anaphylaxis SAE per ICH E2A guidelines</li>
                 <li>• Maintained GCP-compliant documentation</li>
-                <li>• Worked with CRFs and Informed Consent Files</li>
                 <li>• Participated in ward rounds and medication reviews</li>
               </ul>
             </div>
@@ -741,7 +740,7 @@ export default function Home() {
             </p>
             <div className="space-y-2 text-gray-300">
               <p>Chennai, India</p>
-              <p>bathrinathshanmugam7@gmail.com</p>
+              <p><a href="mailto:bathrinathshanmugam7@gmail.com" className="text-inherit no-underline">bathrinathshanmugam7@gmail.com</a></p>
               <p>+91 90425 11773</p>
             </div>
             <a href="https://www.linkedin.com/in/drbathrinath" target="_blank" rel="noopener noreferrer"
