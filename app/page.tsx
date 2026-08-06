@@ -109,12 +109,20 @@ function ResumeDropdown() {
 
   const resumeLinks = [
     {
-      href: "/Bathrinath_MS_PharmD_Drug_Safety_Associate_Resume.pdf",
-      label: "Drug Safety Associate Resume",
+      href: "/drug-safety-resume.pdf",
+      label: "Drug Safety Resume",
     },
     {
-      href: "/Bathrinath_M_S_PharmD_Pharmacovigilance_Resume.pdf",
-      label: "Pharmacovigilance Associate Resume",
+      href: "/pharmacovigilance-resume.pdf",
+      label: "Pharmacovigilance Resume",
+    },
+    {
+      href: "/clinical-data-management-resume.pdf",
+      label: "Clinical Data Management Resume",
+    },
+    {
+      href: "/clinical-research-resume.pdf",
+      label: "Clinical Research Resume",
     },
   ];
 
@@ -137,7 +145,7 @@ function ResumeDropdown() {
       {isOpen && (
         <div
           role="menu"
-          className="glass-card absolute top-full z-40 mt-3 w-[min(20rem,calc(100vw-2rem))] rounded-2xl p-2 text-left"
+          className="glass-card absolute top-full z-40 mt-3 w-[min(22rem,calc(100vw-2rem))] rounded-2xl p-2 text-left"
         >
           {resumeLinks.map((resume) => (
             <a
@@ -201,6 +209,11 @@ export default function Home() {
       name: "Good Clinical Practice",
       issuer: "NIDA Clinical Trials Network (NIH) | 11 Modules",
       year: "May 2026",
+    },
+    {
+      name: "Collecting and Reporting Adverse Events in Clinical Research",
+      issuer: "The Global Health Network",
+      year: "2026",
     },
     {
       name: "Introduction to the Principles and Practice of Clinical Research",
@@ -286,23 +299,23 @@ export default function Home() {
       title: "12th Board (HSE)",
       period: "2019 - 2020",
       school: "Sri Vivekananda Hr. Sec. School - Kallakurichi, Tamil Nadu",
-      score: "88th Percentile",
+      score: "88%",
     },
     {
       title: "10th Board (SSLC)",
       period: "2017 - 2018",
       school: "Sri Vivekananda Hr. Sec. School - Kallakurichi, Tamil Nadu",
-      score: "95th Percentile",
+      score: "95%",
     },
   ];
 
   const achievements = [
     {
-      value: "Merit - Clinical Research (90th percentile)",
+      value: "Merit - Clinical Research (90%)",
       label: "Medclinigen National Mock Talent Test, June 2026",
     },
     {
-      value: "Merit - Clinical Data Management (87.5th percentile)",
+      value: "Merit - Clinical Data Management (87.5%)",
       label: "Medclinigen National Mock Talent Test, April 2026",
     },
   ];
@@ -417,9 +430,9 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-5 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-[0.68rem] font-semibold tracking-[0.12em] uppercase text-cyan-300 sm:mb-6 sm:px-5 sm:text-xs sm:tracking-[0.18em]"
+            className="mb-5 inline-block max-w-full whitespace-normal rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-2 text-[0.68rem] font-semibold leading-relaxed tracking-[0.12em] uppercase text-cyan-300 sm:mb-6 sm:px-5 sm:text-xs sm:tracking-[0.18em]"
           >
-            Drug Safety · Pharmacovigilance · Clinical Research
+            Drug Safety · Pharmacovigilance · Clinical Data Management · Clinical Research
           </motion.span>
 
           <motion.div
@@ -441,15 +454,6 @@ export default function Home() {
             className="mx-auto mb-7 h-px w-48 origin-center"
             style={{ background: "linear-gradient(90deg, transparent, #22d3ee, #3b82f6, transparent)" }}
           />
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-            className="text-lg text-gray-300 md:text-xl font-medium"
-          >
-            Pharmacovigilance Professional — Drug Safety & Clinical Research
-          </motion.p>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -493,7 +497,7 @@ export default function Home() {
             {[
               { value: "2 Years", label: "Academic Clinical Experience" },
               { value: "15+", label: "ADRs Documented" },
-              { value: "11", label: "Clinical Departments" },
+              { value: "8", label: "Clinical Departments" },
             ].map((item) => (
               <motion.div
                 key={item.label}
@@ -614,7 +618,7 @@ export default function Home() {
               <p className="mt-2 text-cyan-400">Government Cuddalore Medical College & Hospital</p>
               <p className="mt-1 text-gray-500">Jul 2024 - Jul 2025</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {["General Medicine","Surgery","Pediatrics","Obstetrics & Gynaecology","Psychiatry","Pulmonology","Orthopaedics","ENT","Ophthalmology","Dermatology","DVL"].map((dept) => (
+                {["General Medicine","Surgery","Pediatrics","Obstetrics & Gynaecology","Psychiatry","Pulmonology","Orthopaedics","DVL"].map((dept) => (
                   <span key={dept} className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm">{dept}</span>
                 ))}
               </div>
@@ -665,7 +669,7 @@ export default function Home() {
               <h3 className="mb-4 text-xl font-semibold">
                 Oral Paper Presentation - &quot;Evaluation of Post-Operative Pain Management Strategies in a Hemorrhoidectomy Patient in a Tertiary Care Teaching Hospital&quot;
               </h3>
-              <p className="mb-4 text-gray-400">
+              <p className="mb-4 text-left leading-7 text-gray-400 sm:text-justify">
                 Trends in Pharmaceutical Sciences (TIPS&apos;25), National Conference, Department of Pharmacy, Annamalai University (APTI-TN Sponsored)
               </p>
               <p className="text-sm leading-7 text-gray-300">April 2025</p>
@@ -736,7 +740,7 @@ export default function Home() {
           <div className="glass-card rounded-3xl p-10 text-center">
             <h2 className="mb-6 text-3xl font-bold">Let us Connect</h2>
             <p className="mb-6 text-gray-300">
-              Interested in Pharmacovigilance, Drug Safety, Clinical Research, or Collaboration Opportunities.
+              Interested in Pharmacovigilance, Drug Safety, Clinical Data Management, Clinical Research, or Collaboration Opportunities.
             </p>
             <div className="space-y-2 text-gray-300">
               <p>Chennai, India</p>
