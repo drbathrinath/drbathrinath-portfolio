@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, BookOpen, School, FileText } from 'lucide-react';
 
@@ -50,18 +50,9 @@ const colorMap = {
 export default function Education() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // Auto-reset when scrolling away to prevent any boundary overflow
-  useEffect(() => {
-    const handleScroll = () => {
-      if (activeId) setActiveId(null);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeId]);
-
   return (
     <section id="education" className="relative py-24 z-10 overflow-hidden w-full">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +64,7 @@ export default function Education() {
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">Education</h2>
         </motion.div>
 
-        {/* Timeline & Grid Container */}
+        {/* Timeline & Flex Row Container with strict boundary reset */}
         <div 
           className="relative pt-6"
           onMouseLeave={() => setActiveId(null)}
@@ -88,8 +79,8 @@ export default function Education() {
             transition={{ duration: 1.5, ease: 'easeInOut' }}
           />
 
-          {/* Grid Layout with instant snap reflow */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative items-stretch pt-4">
+          {/* Flex Row with flex-nowrap - strictly enforces single line, zero wrapping */}
+          <div className="flex flex-col md:flex-row flex-nowrap items-stretch justify-center gap-4 pt-4 w-full">
             {steps.map((step, i) => {
               const colors = colorMap[step.color];
               const isSelected = activeId === step.id;
@@ -102,13 +93,15 @@ export default function Education() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ 
-                    layout: { type: 'spring', stiffness: 500, damping: 32 }, 
-                    opacity: { duration: 0.2 } 
+                    layout: { type: 'spring', stiffness: 600, damping: 28 }, 
+                    opacity: { duration: 0.15 } 
                   }}
                   onMouseEnter={() => setActiveId(step.id)}
                   onTouchStart={() => setActiveId(step.id)}
-                  className={`flex flex-col h-full transition-all duration-150 ${
-                    isSelected ? 'lg:col-span-2 sm:col-span-2 z-20 scale-[1.01]' : 'lg:col-span-1 sm:col-span-1'
+                  className={`flex flex-col transition-all duration-150 cursor-pointer ${
+                    isSelected 
+                      ? 'md:w-[420px] lg:w-[460px] z-20 scale-[1.01]' 
+                      : 'md:w-[220px] lg:w-[250px]'
                   } ${activeId && !isSelected ? 'opacity-40 blur-[0.5px] scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}
                 >
                   {/* Branch Dot Connected to Timeline */}
@@ -120,7 +113,7 @@ export default function Education() {
                   </div>
 
                   <div
-                    className={`glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col cursor-pointer bg-white/5 backdrop-blur-xl transition-all duration-150 ${
+                    className={`glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col bg-white/5 backdrop-blur-xl transition-all duration-150 ${
                       isSelected
                         ? `border-cyan-400 ${colors.glow} bg-white/[0.09]`
                         : 'hover:border-cyan-400/50'
