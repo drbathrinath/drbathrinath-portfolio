@@ -11,7 +11,6 @@ const Contact = () => {
     setLoading(true);
     const formData = new FormData(event.currentTarget);
 
-    // Unga Web3Forms Access Key added here
     formData.append("access_key", "55c1dff3-b81b-4976-a131-6630d8345fa3");
 
     const response = await fetch("https://api.web3forms.com/submit", {
@@ -88,4 +87,67 @@ const Contact = () => {
               {/* Company */}
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                  <Building className="w-4 h-4 text-teal-4
+                  <Building className="w-4 h-4 text-teal-400" /> Company / Organization
+                </label>
+                <input 
+                  type="text" 
+                  name="company" 
+                  required 
+                  placeholder="e.g. Fortrea / IQVIA / Cognizant"
+                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-teal-400 transition-colors text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Email / LinkedIn */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <Mail className="w-4 h-4 text-blue-400" /> Email Address or LinkedIn Profile URL
+              </label>
+              <input 
+                type="text" 
+                name="email_or_linkedin" 
+                required 
+                placeholder="name@company.com or linkedin.com/in/..."
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-400 transition-colors text-sm"
+              />
+            </div>
+
+            {/* Message */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-cyan-400" /> Message / Role Details
+              </label>
+              <textarea 
+                name="message" 
+                rows={4}
+                required 
+                placeholder="Discussing Pharmacovigilance / Drug Safety Associate opportunity..."
+                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-400 transition-colors text-sm resize-none"
+              ></textarea>
+            </div>
+
+            {/* Submit Button */}
+            <motion.button 
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={loading}
+              className="w-full flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-black font-bold tracking-wide hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(6,182,212,0.4)] disabled:opacity-50"
+            >
+              {loading ? (
+                <span>Sending details...</span>
+              ) : (
+                <>
+                  <Send className="w-5 h-5 mr-2" /> Connect with Bathrinath
+                </>
+              )}
+            </motion.button>
+          </form>
+        )}
+      </motion.div>
+    </section>
+  );
+};
+
+export default Contact;
