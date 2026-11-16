@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, BookOpen, School, FileText } from 'lucide-react';
 
@@ -42,16 +42,29 @@ const steps = [
 ];
 
 const colorMap = {
-  teal: { text: 'text-cyan-300', bg: 'bg-cyan-400/10', border: 'border-cyan-400/30', glow: 'shadow-[0_0_35px_rgba(6,182,212,0.35)]', dot: 'bg-cyan-400' },
-  green: { text: 'text-teal-300', bg: 'bg-teal-400/10', border: 'border-teal-400/30', glow: 'shadow-[0_0_35px_rgba(34,197,94,0.35)]', dot: 'bg-teal-400' },
-  orange: { text: 'text-blue-300', bg: 'bg-blue-400/10', border: 'border-blue-400/30', glow: 'shadow-[0_0_35px_rgba(249,115,22,0.35)]', dot: 'bg-blue-400' },
+  teal: { text: 'text-cyan-300', bg: 'bg-cyan-400/10', border: 'border-cyan-400/30', glow: 'shadow-[0_0_40px_rgba(6,182,212,0.4)]', dot: 'bg-cyan-400' },
+  green: { text: 'text-teal-300', bg: 'bg-teal-400/10', border: 'border-teal-400/30', glow: 'shadow-[0_0_40px_rgba(34,197,94,0.4)]', dot: 'bg-teal-400' },
+  orange: { text: 'text-blue-300', bg: 'bg-blue-400/10', border: 'border-blue-400/30', glow: 'shadow-[0_0_40px_rgba(249,115,22,0.4)]', dot: 'bg-blue-400' },
 };
 
 export default function Education() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  // Auto-reset when scrolling away from the section
+  useEffect(() => {
+    const handleScroll = () => {
+      if (activeId) setActiveId(null);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeId]);
+
   return (
-    <section id="education" className="relative py-24 z-10 overflow-hidden w-full">
+    <section 
+      id="education" 
+      className="relative py-24 z-10 overflow-hidden w-full"
+      onMouseLeave={() => setActiveId(null)}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -64,11 +77,8 @@ export default function Education() {
           <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">Education</h2>
         </motion.div>
 
-        {/* Timeline & Flex Row Container with strict boundary reset */}
-        <div 
-          className="relative pt-6"
-          onMouseLeave={() => setActiveId(null)}
-        >
+        {/* Timeline & Flex Row Container */}
+        <div className="relative pt-6">
           {/* Horizontal Timeline Bar */}
           <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/10" />
           <motion.div
@@ -79,7 +89,7 @@ export default function Education() {
             transition={{ duration: 1.5, ease: 'easeInOut' }}
           />
 
-          {/* Flex Row with flex-nowrap - strictly enforces single line, zero wrapping */}
+          {/* Single Line Flexbox with zero wrapping */}
           <div className="flex flex-col md:flex-row flex-nowrap items-stretch justify-center gap-4 pt-4 w-full">
             {steps.map((step, i) => {
               const colors = colorMap[step.color];
@@ -93,27 +103,27 @@ export default function Education() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ 
-                    layout: { type: 'spring', stiffness: 600, damping: 28 }, 
-                    opacity: { duration: 0.15 } 
+                    layout: { type: 'spring', stiffness: 700, damping: 25 }, 
+                    opacity: { duration: 0.1 } 
                   }}
                   onMouseEnter={() => setActiveId(step.id)}
                   onTouchStart={() => setActiveId(step.id)}
-                  className={`flex flex-col transition-all duration-150 cursor-pointer ${
+                  className={`flex flex-col transition-all duration-100 cursor-pointer ${
                     isSelected 
-                      ? 'md:w-[420px] lg:w-[460px] z-20 scale-[1.01]' 
-                      : 'md:w-[220px] lg:w-[250px]'
-                  } ${activeId && !isSelected ? 'opacity-40 blur-[0.5px] scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}
+                      ? 'md:w-[380px] lg:w-[420px] z-20 scale-[1.01]' 
+                      : 'md:w-[220px] lg:w-[240px]'
+                  } ${activeId && !isSelected ? 'opacity-35 blur-[0.5px] scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}
                 >
                   {/* Branch Dot Connected to Timeline */}
                   <div className="hidden md:flex justify-center -mt-4 mb-4 relative z-10">
                     <motion.div
                       layout
-                      className={`w-4 h-4 rounded-full ${colors.dot} ring-4 ring-[#030712] shadow-[0_0_12px_rgba(255,255,255,0.3)]`}
+                      className={`w-4 h-4 rounded-full ${colors.dot} ring-4 ring-[#030712] shadow-[0_0_12px_rgba(255,255,255,0.4)]`}
                     />
                   </div>
 
                   <div
-                    className={`glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col bg-white/5 backdrop-blur-xl transition-all duration-150 ${
+                    className={`glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col bg-white/5 backdrop-blur-xl transition-all duration-100 ${
                       isSelected
                         ? `border-cyan-400 ${colors.glow} bg-white/[0.09]`
                         : 'hover:border-cyan-400/50'
