@@ -11,11 +11,11 @@ import Honors from '@/components/Honors';
 
 function App() {
   return (
-    <div className="relative min-h-screen text-ink-100">
+    <div className="relative min-h-screen text-ink-100 w-full overflow-x-hidden">
       <GlobalBackground />
-      <div className="relative z-10">
+      <div className="relative z-10 w-full">
         <Navbar />
-        <main>
+        <main className="w-full">
           <Hero />
           <About />
           <Skills />
