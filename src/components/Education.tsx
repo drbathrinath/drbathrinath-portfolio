@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, BookOpen, School, FileText } from 'lucide-react';
 
@@ -50,6 +50,15 @@ const colorMap = {
 export default function Education() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  // Automatically reset card state when user scrolls up or down
+  useEffect(() => {
+    const handleScroll = () => {
+      if (activeId) setActiveId(null);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeId]);
+
   const activeStep = steps.find((s) => s.id === activeId);
 
   return (
@@ -93,7 +102,6 @@ export default function Education() {
                     onMouseEnter={() => setActiveId(step.id)}
                     onMouseLeave={() => setActiveId(null)}
                     onTouchStart={() => setActiveId(step.id)}
-                    onTouchEnd={() => setActiveId(null)}
                     className={`absolute inset-0 glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col cursor-pointer bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 shadow-lg`}
                   >
                     <div className="flex items-start justify-between gap-4 mb-4">
@@ -116,21 +124,24 @@ export default function Education() {
           })}
         </div>
 
-        {/* Center Spotlight Pop-out Card with Progressive Growth during transition */}
+        {/* Center Spotlight Pop-out Card with light unblurred background and scroll reset */}
         <AnimatePresence>
           {activeStep && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-              {/* Simultaneous background blur */}
+            <div 
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+              onMouseLeave={() => setActiveId(null)}
+            >
+              {/* Very light 75% unblurred background overlay */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute inset-0 bg-black/70 backdrop-blur-md pointer-events-auto"
+                className="absolute inset-0 bg-black/20 backdrop-blur-[2px] pointer-events-auto"
                 onClick={() => setActiveId(null)}
               />
 
-              {/* Expanding Center Card with progressive scaling spring */}
+              {/* Expanding Center Card */}
               <motion.div
                 layoutId={`card-${activeStep.id}`}
                 transition={{ type: 'spring', stiffness: 220, damping: 26 }}
