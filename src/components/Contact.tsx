@@ -1,153 +1,135 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, Building, User, Mail, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
-const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+export default function Contact() {
+  const [submitted, setSubmitted] = useState(false);
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setLoading(true);
-    const formData = new FormData(event.currentTarget);
-
-    formData.append("access_key", "55c1dff3-b81b-4976-a131-6630d8345fa3");
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setIsSubmitted(true);
-      setLoading(false);
-      event.currentTarget.reset();
-    } else {
-      console.log("Error", data);
-      setLoading(false);
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 4000);
   };
 
   return (
-    <section id="contact" className="py-20 px-6 max-w-4xl mx-auto relative z-10">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="bg-white/5 backdrop-blur-xl border border-cyan-500/30 rounded-3xl p-8 md:p-12 shadow-[0_0_30px_rgba(6,182,212,0.1)]"
-      >
-        <div className="text-center mb-10">
-          <h2 className="text-cyan-400 font-medium tracking-widest uppercase mb-2 text-sm">
-            Hiring / Collaboration
-          </h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-            Recruiter Quick Connect
-          </h3>
-          <p className="text-gray-400 mt-2 text-sm md:text-base">
-            Are you a recruiter or hiring manager? Drop your details here for instant connection & credentials.
-          </p>
-        </div>
+    <section id="contact" className="relative py-24 z-10 overflow-hidden w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="text-sm font-display text-cyan-400 tracking-widest uppercase">Get in Touch</span>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">Contact Me</h2>
+        </motion.div>
 
-        {isSubmitted ? (
-          <motion.div 
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-center py-12 flex flex-col items-center justify-center"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          {/* Contact Info Card */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass rounded-3xl p-8 border border-white/10 bg-white/5 backdrop-blur-xl"
           >
-            <CheckCircle className="w-16 h-16 text-teal-400 mb-4 animate-bounce" />
-            <h4 className="text-2xl font-bold text-white mb-2">Message Sent Successfully!</h4>
-            <p className="text-gray-400">Thank you for reaching out. I'll get back to you shortly via LinkedIn or Email.</p>
-            <button 
-              onClick={() => setIsSubmitted(false)}
-              className="mt-6 px-6 py-2 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition-colors text-sm"
-            >
-              Send Another Message
-            </button>
+            <h3 className="font-display text-2xl font-bold text-white mb-4">Let's Connect</h3>
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-8">
+              Open to professional opportunities in Pharmacovigilance, Drug Safety, and Clinical Research. Reach out for collaborations or inquiries.
+            </p>
+
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Email</p>
+                  <p className="text-sm sm:text-base font-medium text-white">dr.bathrinath.ms@gmail.com</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Phone</p>
+                  <p className="text-sm sm:text-base font-medium text-white">+91 Available on request</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 text-gray-300">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Location</p>
+                  <p className="text-sm sm:text-base font-medium text-white">Kallakurichi, Tamil Nadu, India (Open to Hyderabad/Bangalore)</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
-        ) : (
-          <form onSubmit={onSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                  <User className="w-4 h-4 text-cyan-400" /> Your Name / Recruiter Name
-                </label>
-                <input 
-                  type="text" 
-                  name="name" 
-                  required 
-                  placeholder="e.g. John Doe"
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-400 transition-colors text-sm"
-                />
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass rounded-3xl p-8 border border-white/10 bg-white/5 backdrop-blur-xl relative"
+          >
+            {submitted ? (
+              <div className="py-16 text-center space-y-4">
+                <CheckCircle2 className="w-16 h-16 text-cyan-400 mx-auto animate-bounce" />
+                <h4 className="font-display text-xl font-bold text-white">Message Sent Successfully!</h4>
+                <p className="text-sm text-gray-300">Thank you for reaching out. I will get back to you soon.</p>
               </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  />
+                </div>
 
-              {/* Company */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                  <Building className="w-4 h-4 text-teal-400" /> Company / Organization
-                </label>
-                <input 
-                  type="text" 
-                  name="company" 
-                  required 
-                  placeholder="e.g. Fortrea / IQVIA / Cognizant"
-                  className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-teal-400 transition-colors text-sm"
-                />
-              </div>
-            </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-2">Your Email</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm"
+                  />
+                </div>
 
-            {/* Email / LinkedIn */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-400" /> Email Address or LinkedIn Profile URL
-              </label>
-              <input 
-                type="text" 
-                name="email_or_linkedin" 
-                required 
-                placeholder="name@company.com or linkedin.com/in/..."
-                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-400 transition-colors text-sm"
-              />
-            </div>
+                <div>
+                  <label className="block text-xs font-medium text-gray-300 mb-2">Message</label>
+                  <textarea
+                    required
+                    rows={4}
+                    placeholder="Write your message here..."
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 text-sm resize-none"
+                  />
+                </div>
 
-            {/* Message */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-cyan-400" /> Message / Role Details
-              </label>
-              <textarea 
-                name="message" 
-                rows={4}
-                required 
-                placeholder="Discussing Pharmacovigilance / Drug Safety Associate opportunity..."
-                className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-cyan-400 transition-colors text-sm resize-none"
-              ></textarea>
-            </div>
-
-            {/* Submit Button */}
-            <motion.button 
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={loading}
-              className="w-full flex items-center justify-center px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-black font-bold tracking-wide hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(6,182,212,0.4)] disabled:opacity-50"
-            >
-              {loading ? (
-                <span>Sending details...</span>
-              ) : (
-                <>
-                  <Send className="w-5 h-5 mr-2" /> Connect with Bathrinath
-                </>
-              )}
-            </motion.button>
-          </form>
-        )}
-      </motion.div>
+                <button
+                  type="submit"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-black font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+                >
+                  <Send className="w-4 h-4" />
+                  Send Message
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Contact;
+}
