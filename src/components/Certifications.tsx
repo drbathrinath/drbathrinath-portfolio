@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, BadgeCheck, ExternalLink } from 'lucide-react';
 
@@ -27,7 +28,7 @@ function CertBadge({ cert, index }: { cert: typeof certifications[0]; index: num
 
   return (
     <div
-      className={`flex-shrink-0 w-[300px] glass rounded-2xl p-5 border ${colorClass} transition-all duration-300 mx-3 group cursor-default`}
+      className={`flex-shrink-0 w-[300px] glass rounded-2xl p-5 border ${colorClass} transition-all duration-300 mx-3 group cursor-default bg-white/5 backdrop-blur-xl`}
     >
       <div className="flex items-start gap-3">
         <div className={`w-10 h-10 rounded-lg bg-white/5 ${iconColor} flex items-center justify-center flex-shrink-0`}>
@@ -36,7 +37,7 @@ function CertBadge({ cert, index }: { cert: typeof certifications[0]; index: num
         <div className="flex-1 min-w-0">
           <h3 className="font-display text-sm font-semibold text-white leading-snug mb-1">{cert.title}</h3>
           <p className={`text-xs ${iconColor} font-medium`}>{cert.issuer}</p>
-          <p className="text-xs text-ink-500 mt-0.5">{cert.date}</p>
+          <p className="text-xs text-gray-400 mt-0.5">{cert.date}</p>
         </div>
       </div>
     </div>
@@ -54,17 +55,17 @@ export default function Certifications() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-display text-primary-400 tracking-widest uppercase">Credentials & Training</span>
+          <span className="text-sm font-display text-cyan-400 tracking-widest uppercase">Credentials & Training</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3">Certifications</h2>
-          <p className="text-ink-400 mt-4 max-w-2xl mx-auto text-sm">
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto text-sm">
             9+ verified certifications in pharmacovigilance, clinical research, GCP, and data programming.
           </p>
         </motion.div>
       </div>
 
-      {/* Infinite marquee row 1 */}
-      <div className="relative flex overflow-hidden py-4 mask-gradient">
-        <div className="flex animate-marquee">
+      {/* Infinite marquee row 1 (Pauses on hover/touch) */}
+      <div className="relative flex overflow-hidden py-4 mask-gradient group">
+        <div className="flex animate-marquee group-hover:[animation-play-state:paused]">
           {certifications.map((cert, i) => (
             <CertBadge key={`row1-${i}`} cert={cert} index={i} />
           ))}
@@ -74,9 +75,9 @@ export default function Certifications() {
         </div>
       </div>
 
-      {/* Infinite marquee row 2 (reversed, offset) */}
-      <div className="relative flex overflow-hidden py-4 mask-gradient">
-        <div className="flex animate-marquee-reverse">
+      {/* Infinite marquee row 2 (Reversed, pauses on hover/touch) */}
+      <div className="relative flex overflow-hidden py-4 mask-gradient group">
+        <div className="flex animate-marquee-reverse group-hover:[animation-play-state:paused]">
           {[...certifications].reverse().map((cert, i) => (
             <CertBadge key={`row2-${i}`} cert={cert} index={certifications.length - 1 - i} />
           ))}
@@ -87,8 +88,8 @@ export default function Certifications() {
       </div>
 
       {/* Edge gradients */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-ink-950 to-transparent pointer-events-none z-20" />
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-ink-950 to-transparent pointer-events-none z-20" />
+      <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#09090b] to-transparent pointer-events-none z-20" />
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#09090b] to-transparent pointer-events-none z-20" />
 
       <style>{`
         .mask-gradient {

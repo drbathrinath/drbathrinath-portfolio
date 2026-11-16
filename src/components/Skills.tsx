@@ -62,37 +62,37 @@ const cards = [
 
 const colorMap = {
   teal: {
-    text: 'text-primary-300',
-    border: 'border-primary-400/30',
-    bg: 'bg-primary-400/10',
-    glow: 'hover:shadow-[0_0_40px_rgba(17,201,232,0.2)]',
-    badge: 'bg-primary-400/20 text-primary-200',
+    text: 'text-cyan-300',
+    border: 'border-cyan-400/30',
+    bg: 'bg-cyan-400/10',
+    glow: 'hover:shadow-[0_0_40px_rgba(6,182,212,0.2)]',
+    badge: 'bg-cyan-400/20 text-cyan-200',
   },
   green: {
-    text: 'text-secondary-300',
-    border: 'border-secondary-400/30',
-    bg: 'bg-secondary-400/10',
-    glow: 'hover:shadow-[0_0_40px_rgba(21,185,133,0.2)]',
-    badge: 'bg-secondary-400/20 text-secondary-200',
+    text: 'text-teal-300',
+    border: 'border-teal-400/30',
+    bg: 'bg-teal-400/10',
+    glow: 'hover:shadow-[0_0_40px_rgba(20,184,166,0.2)]',
+    badge: 'bg-teal-400/20 text-teal-200',
   },
   orange: {
-    text: 'text-accent-300',
-    border: 'border-accent-400/30',
-    bg: 'bg-accent-400/10',
-    glow: 'hover:shadow-[0_0_40px_rgba(249,115,22,0.2)]',
-    badge: 'bg-accent-400/20 text-accent-200',
+    text: 'text-blue-300',
+    border: 'border-blue-400/30',
+    bg: 'bg-blue-400/10',
+    glow: 'hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]',
+    badge: 'bg-blue-400/20 text-blue-200',
   },
 };
 
 function Marquee({ items, color }: { items: string[]; color: string }) {
-  const text = color === 'teal' ? 'text-primary-300' : '';
+  const text = color === 'teal' ? 'text-cyan-300' : '';
   return (
-    <div className="relative w-full overflow-hidden py-3 mt-4 border-t border-white/5">
-      <div className="flex gap-6 animate-marquee whitespace-nowrap">
+    <div className="relative w-full overflow-hidden py-3 mt-4 border-t border-white/5 group">
+      <div className="flex gap-6 animate-marquee whitespace-nowrap group-hover:[animation-play-state:paused]">
         {[...items, ...items, ...items].map((item, i) => (
-          <span key={i} className={`text-sm font-display ${text} flex items-center gap-3`}>
+          <span key={i} className={`text-xs sm:text-sm font-display ${text} flex items-center gap-3`}>
             {item}
-            <span className="text-primary-500/40">•</span>
+            <span className="text-cyan-500/40">•</span>
           </span>
         ))}
       </div>
@@ -101,11 +101,12 @@ function Marquee({ items, color }: { items: string[]; color: string }) {
 }
 
 export default function Skills() {
+  // Default PV expanded, allows smooth toggle on mobile & desktop
   const [expanded, setExpanded] = useState<string | null>('pv');
 
   return (
-    <section id="skills" className="relative py-24 z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="skills" className="relative py-24 z-10 overflow-hidden w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,11 +114,11 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-display text-primary-400 tracking-widest uppercase">What I bring to the table</span>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3">Core Skills</h2>
+          <span className="text-sm font-display text-cyan-400 tracking-widest uppercase">What I bring to the table</span>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">Core Skills</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           {cards.map((card, i) => {
             const colors = colorMap[card.color];
             const isOpen = expanded === card.id;
@@ -129,52 +130,40 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`${card.priority ? 'md:col-span-2' : ''}`}
+                className={`${card.priority ? 'md:col-span-2' : ''} w-full`}
               >
-                <motion.div
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity, 
-                    ease: "easeInOut",
-                    delay: i * 0.2 
-                  }}
-                  className="h-full"
-                >
+                <div className="h-full">
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    onMouseEnter={() => setExpanded(card.id)}
-                    onMouseLeave={() => setExpanded(null)}
+                    whileHover={{ scale: 1.01 }}
                     onClick={() => setExpanded(isOpen ? null : card.id)} 
-                    className={`glass h-full rounded-2xl p-6 border ${colors.border} ${colors.glow} transition-all duration-300 cursor-pointer relative z-10`}
+                    className={`glass h-full rounded-2xl p-5 sm:p-6 border ${colors.border} ${colors.glow} transition-all duration-300 cursor-pointer relative z-10 bg-white/5 backdrop-blur-xl`}
                   >
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-start gap-4">
-                        <div className={`w-14 h-14 rounded-xl ${colors.bg} ${colors.text} flex items-center justify-center flex-shrink-0`}>
+                      <div className="flex items-start gap-3 sm:gap-4 min-w-0">
+                        <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${colors.bg} ${colors.text} flex items-center justify-center flex-shrink-0`}>
                           {card.icon}
                         </div>
-                        <div>
-                          <div className="flex items-center gap-3 mb-1">
-                            <h3 className="font-display text-xl font-semibold text-white">{card.title}</h3>
+                        <div className="min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-1">
+                            <h3 className="font-display text-lg sm:text-xl font-semibold text-white truncate">{card.title}</h3>
                             
                             {card.priority && (
-                              <span className={`text-xs px-2.5 py-1 rounded-full ${colors.badge} font-medium`}>
+                              <span className={`text-xs px-2.5 py-0.5 sm:py-1 rounded-full ${colors.badge} font-medium`}>
                                 {card.subtitle}
                               </span>
                             )}
                             {!card.priority && (
-                              <span className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-ink-400 font-medium">
+                              <span className="text-xs px-2.5 py-0.5 sm:py-1 rounded-full bg-white/5 text-gray-400 font-medium">
                                 {card.subtitle}
                               </span>
                             )}
-                            
                           </div>
-                          <p className="text-ink-400 text-sm">
+                          <p className="text-gray-400 text-xs sm:text-sm">
                             {card.items.length} key competenc{card.items.length > 1 ? 'ies' : 'y'}
                           </p>
                         </div>
                       </div>
-                      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="flex-shrink-0">
                         <ChevronDown className={`w-5 h-5 ${colors.text}`} />
                       </motion.div>
                     </div>
@@ -192,7 +181,7 @@ export default function Skills() {
                             {card.items.map((item) => (
                               <div
                                 key={item}
-                                className="flex items-center gap-3 text-ink-300 text-sm py-2 px-3 rounded-lg bg-white/[0.02] border border-white/5"
+                                className="flex items-center gap-3 text-gray-300 text-xs sm:text-sm py-2 px-3 rounded-lg bg-white/[0.02] border border-white/5"
                               >
                                 <span className={`w-1.5 h-1.5 rounded-full ${colors.text.replace('300', '400')} bg-current`} />
                                 {item}
@@ -204,7 +193,7 @@ export default function Skills() {
                       )}
                     </AnimatePresence>
                   </motion.div>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}
