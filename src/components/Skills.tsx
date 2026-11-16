@@ -101,8 +101,8 @@ function Marquee({ items, color }: { items: string[]; color: string }) {
 }
 
 export default function Skills() {
-  // Default PV expanded, allows smooth toggle on mobile & desktop
-  const [expanded, setExpanded] = useState<string | null>('pv');
+  // Starts with null so cards are closed by default, opens instantly on touch/hover
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
     <section id="skills" className="relative py-24 z-10 overflow-hidden w-full">
@@ -135,7 +135,9 @@ export default function Skills() {
                 <div className="h-full">
                   <motion.div
                     whileHover={{ scale: 1.01 }}
-                    onClick={() => setExpanded(isOpen ? null : card.id)} 
+                    onMouseEnter={() => setExpanded(card.id)}
+                    onMouseLeave={() => setExpanded(null)}
+                    onTouchStart={() => setExpanded(card.id)}
                     className={`glass h-full rounded-2xl p-5 sm:p-6 border ${colors.border} ${colors.glow} transition-all duration-300 cursor-pointer relative z-10 bg-white/5 backdrop-blur-xl`}
                   >
                     <div className="flex items-start justify-between gap-4">
