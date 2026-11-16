@@ -1,43 +1,58 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, ExternalLink, Presentation, ChevronDown, BookOpen } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { GraduationCap, BookOpen, School, FileText } from 'lucide-react';
 
-const publications = [
+const steps = [
   {
-    type: 'publication',
-    title: 'Comparative Analysis of Oral Labetalol vs Oral Nifedipine in Gestational Hypertension',
-    venue: 'VVI Journal',
-    year: '2025',
-    link: 'https://vvijournal.com/volume-13-issue-5-2025/',
-    summary:
-      'A head-to-head comparative study evaluating the efficacy and safety profiles of oral labetalol versus oral nifedipine in the management of gestational hypertension, with emphasis on maternal and fetal outcomes.',
+    id: 'pharmd',
+    icon: <GraduationCap className="w-7 h-7" />,
+    title: 'Doctor of Pharmacy (Pharm.D)',
+    institution: 'Annamalai University',
+    period: '2020 – 2026',
+    detail: 'Six-year doctoral program in pharmacy practice with clinical clerkship, adverse drug reaction monitoring, and advanced pharmacovigilance training.',
+    color: 'teal' as const,
   },
   {
-    type: 'publication',
-    title: 'Evaluation of Postoperative Pain Management Strategies in Haemorrhoidectomy',
-    venue: 'IJISRT',
-    year: 'Aug 2025',
-    link: 'https://doi.org/10.38124/ijisrt/25aug1277',
-    summary:
-      'A systematic evaluation of postoperative pain management protocols following haemorrhoidectomy procedures, comparing pharmacological interventions and their impact on patient recovery and satisfaction.',
+    id: 'clinilaunch',
+    icon: <BookOpen className="w-7 h-7" />,
+    title: 'Advanced Diploma in Clinical Research',
+    institution: 'CliniLaunch Research Institute',
+    period: 'Mar 2026 – Aug 2026',
+    detail: 'Intensive clinical research diploma covering Regulatory Affairs, Clinical Data Management, Medical Writing, Pharmacology, Argus Safety, and Pharmacovigilance Operations.',
+    color: 'green' as const,
   },
   {
-    type: 'presentation',
-    title: 'Evaluation of Post-Operative Pain Management Strategies in Haemorrhoidectomy',
-    venue: "TIPS'25 Conference",
-    year: 'April 2025',
-    link: null,
-    summary:
-      'Oral presentation delivered at TIPS\u201925 (Translational Innovations in Pharmaceutical Sciences) conference, showcasing research findings on optimizing post-operative analgesic strategies.',
+    id: 'hsc',
+    icon: <School className="w-7 h-7" />,
+    title: '12th Board (HSE)',
+    institution: 'Sri Vivekananda Hr. Sec. School',
+    period: '2019 – 2020 · 88%',
+    detail: 'Higher Secondary Education with science stream — achieved 88% overall, building the analytical core for healthcare studies.',
+    color: 'orange' as const,
+  },
+  {
+    id: 'sslc',
+    icon: <FileText className="w-7 h-7" />,
+    title: '10th Board (SSLC)',
+    institution: 'Sri Vivekananda Hr. Sec. School',
+    period: '2017 – 2018 · 95%',
+    detail: 'Secondary School Leaving Certificate — achieved 95% overall, demonstrating early academic excellence and strong foundational aptitude.',
+    color: 'teal' as const,
   },
 ];
 
-export default function Research() {
-  const [expanded, setExpanded] = useState<number | null>(0);
+const colorMap = {
+  teal: { text: 'text-cyan-300', bg: 'bg-cyan-400/10', border: 'border-cyan-400/30', dot: 'bg-cyan-400' },
+  green: { text: 'text-teal-300', bg: 'bg-teal-400/10', border: 'border-teal-400/30', dot: 'bg-teal-400' },
+  orange: { text: 'text-blue-300', bg: 'bg-blue-400/10', border: 'border-blue-400/30', dot: 'bg-blue-400' },
+};
+
+export default function Education() {
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
-    <section id="research" className="relative py-24 z-10">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="education" className="relative py-24 z-10 overflow-hidden w-full">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,113 +60,85 @@ export default function Research() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-display text-primary-400 tracking-widest uppercase">Scholarly Work</span>
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3">
-            Research Publications & Presentations
-          </h2>
+          <span className="text-sm font-display text-cyan-400 tracking-widest uppercase">Academic Journey</span>
+          <h2 className="font-display text-3xl sm:text-5xl font-bold text-white mt-3">Education</h2>
         </motion.div>
 
-        <div className="space-y-5">
-          {publications.map((pub, i) => {
-            const isOpen = expanded === i;
-            const isPresentation = pub.type === 'presentation';
-            return (
-              <motion.div
-                key={pub.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <motion.div
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.2
-                  }}
-                >
-                  <div
-                    onMouseEnter={() => setExpanded(i)}
-                    onMouseLeave={() => setExpanded(null)}
-                    className={`glass rounded-2xl border transition-all duration-300 ${
-                      isPresentation ? 'border-accent-400/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)]' : 'border-primary-400/30 hover:shadow-[0_0_30px_rgba(17,201,232,0.15)]'
-                    } overflow-hidden`}
-                  >
-                    <button
-                      onClick={() => setExpanded(isOpen ? null : i)}
-                      className="w-full text-left p-6 flex items-start justify-between gap-4 cursor-pointer"
-                    >
-                      <div className="flex items-start gap-4 flex-1">
-                        <div
-                          className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                            isPresentation ? 'bg-accent-400/10 text-accent-300' : 'bg-primary-400/10 text-primary-300'
-                          }`}
-                        >
-                          {isPresentation ? <Presentation className="w-6 h-6" /> : <FileText className="w-6 h-6" />}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <span
-                              className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                                isPresentation ? 'bg-accent-400/20 text-accent-200' : 'bg-primary-400/20 text-primary-200'
-                              }`}
-                            >
-                              {isPresentation ? 'Presentation' : 'Publication'}
-                            </span>
-                            <span className="text-xs text-ink-500">{pub.venue} · {pub.year}</span>
-                          </div>
-                          <h3 className="font-display text-base font-semibold text-white leading-snug">{pub.title}</h3>
-                        </div>
-                      </div>
-                      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} className="flex-shrink-0 mt-1">
-                        <ChevronDown className={`w-5 h-5 ${isPresentation ? 'text-accent-300' : 'text-primary-300'}`} />
-                      </motion.div>
-                    </button>
+        <div className="relative">
+          {/* Horizontal Timeline Line */}
+          <div className="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/10" />
+          <motion.div
+            className="hidden md:block absolute top-6 left-0 h-px bg-gradient-to-r from-cyan-400 to-teal-400"
+            initial={{ width: '0%' }}
+            whileInView={{ width: '100%' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+          />
 
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-6 pb-6 pt-0">
-                            <div className="ml-16 border-t border-white/5 pt-4">
-                              <p className="text-ink-300 text-sm leading-relaxed mb-4">{pub.summary}</p>
-                              {pub.link ? (
-                                <a
-                                  href={pub.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                                    isPresentation
-                                      ? 'bg-accent-400/10 text-accent-200 border border-accent-400/30 hover:bg-accent-400/20 hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]'
-                                      : 'bg-primary-400/10 text-primary-200 border border-primary-400/30 hover:bg-primary-400/20 hover:shadow-[0_0_20px_rgba(17,201,232,0.3)]'
-                                  } group`}
-                                >
-                                  <ExternalLink className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                                  Read Full {isPresentation ? 'Presentation' : 'Paper'}
-                                </a>
-                              ) : (
-                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-ink-400 bg-white/[0.03] border border-white/5">
-                                  <BookOpen className="w-4 h-4" />
-                                  Conference Presentation — TIPS'25
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
+          {/* Grid with Instant Layout Reflow & Zero Latency */}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative items-stretch pt-2"
+            onMouseLeave={() => setActiveId(null)}
+          >
+            {steps.map((step, i) => {
+              const colors = colorMap[step.color];
+              const isSelected = activeId === step.id;
+
+              return (
+                <motion.div
+                  key={step.id}
+                  layout
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ 
+                    layout: { type: 'spring', stiffness: 450, damping: 30 }, 
+                    opacity: { duration: 0.3 } 
+                  }}
+                  onMouseEnter={() => setActiveId(step.id)}
+                  onTouchStart={() => setActiveId(step.id)}
+                  className={`flex flex-col h-full transition-all duration-200 ${
+                    isSelected ? 'lg:col-span-2 sm:col-span-2 z-20 scale-[1.02]' : 'lg:col-span-1 sm:col-span-1'
+                  } ${activeId && !isSelected ? 'opacity-50 blur-[0.5px] scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}
+                >
+                  {/* Timeline Branch Dot */}
+                  <div className="hidden md:flex justify-center mb-4 relative z-10">
+                    <motion.div
+                      layout
+                      className={`w-4 h-4 rounded-full ${colors.dot} ring-4 ring-[#030712]`}
+                    />
+                  </div>
+
+                  <div
+                    className={`glass rounded-2xl p-6 border ${colors.border} h-full flex flex-col cursor-pointer bg-white/5 backdrop-blur-xl transition-all duration-200 ${
+                      isSelected
+                        ? 'border-cyan-400 shadow-[0_0_50px_rgba(6,182,212,0.4)] bg-white/[0.08]'
+                        : 'hover:border-cyan-400/50'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className={`w-12 h-12 rounded-xl ${colors.bg} ${colors.text} flex items-center justify-center flex-shrink-0`}>
+                        {step.icon}
+                      </div>
+                      {isSelected && (
+                        <span className="text-xs px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-medium">
+                          Active Focus
+                        </span>
                       )}
-                    </AnimatePresence>
+                    </div>
+                    <h3 className="font-display text-lg font-semibold text-white leading-tight mb-1">
+                      {step.title}
+                    </h3>
+                    <p className={`text-sm ${colors.text} font-medium`}>{step.institution}</p>
+                    <p className="text-xs text-gray-400 mt-1">{step.period}</p>
+                    <p className={`text-xs sm:text-sm text-gray-300 mt-3 leading-relaxed flex-1 ${isSelected ? 'line-clamp-none' : 'line-clamp-3'}`}>
+                      {step.detail}
+                    </p>
                   </div>
                 </motion.div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
