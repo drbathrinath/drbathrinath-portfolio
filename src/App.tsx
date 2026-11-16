@@ -8,6 +8,7 @@ import Experience from '@/components/Experience';
 import Research from '@/components/Research';
 import Certifications from '@/components/Certifications';
 import Honors from '@/components/Honors';
+import Contact from '@/components/Contact'; // 👇 Contact component import pannirukom
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Research />
           <Certifications />
           <Honors />
+          <Contact /> {/* 👇 Inga contact form-a render pannirukom */}
         </main>
       </div>
     </div>
