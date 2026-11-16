@@ -1,14 +1,14 @@
-import GlobalBackground from '@/components/GlobalBackground';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import About from '@/components/About';
-import Skills from '@/components/Skills';
-import Education from '@/components/Education';
-import Experience from '@/components/Experience';
-import Research from '@/components/Research';
-import Certifications from '@/components/Certifications';
-import Honors from '@/components/Honors';
-import Contact from '@/components/Contact'; // 👇 Contact component import pannirukom
+import GlobalBackground from './components/GlobalBackground';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Skills from './components/Skills';
+import Education from './components/Education';
+import Experience from './components/Experience';
+import Research from './components/Research';
+import Certifications from './components/Certifications';
+import Honors from './components/Honors';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Research />
           <Certifications />
           <Honors />
-          <Contact /> {/* 👇 Inga contact form-a render pannirukom */}
+          <Contact />
         </main>
       </div>
     </div>
