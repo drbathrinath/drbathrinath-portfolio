@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { Building2, Stethoscope, BarChart3, FileSpreadsheet } from 'lucide-react';
+import { Building2, Stethoscope, BarChart3, FileSpreadsheet, ExternalLink } from 'lucide-react';
 
 const timeline = [
   {
@@ -41,6 +41,7 @@ const timeline = [
     ],
     tags: ['Healthcare Analytics', 'Data Analysis', 'Health Informatics', 'Data Cleaning'],
     color: 'teal' as const,
+    certUrl: '/Healthcare Intern.jpeg', // Public folder-kulla irukkura unoda certificate file name
   },
   {
     icon: <FileSpreadsheet className="w-5 h-5" />,
@@ -53,6 +54,7 @@ const timeline = [
     ],
     tags: ['Microsoft Excel', 'Data Analysis', 'Efficiency Optimization', 'Data Manipulation'],
     color: 'green' as const,
+    certUrl: '/Excel Intern.jpeg', // Public folder-kulla irukkura unoda certificate file name
   },
 ];
 
@@ -61,7 +63,6 @@ const colorMap = {
   green: { text: 'text-secondary-300', bg: 'bg-secondary-400/10', border: 'border-secondary-400/30', glow: 'shadow-[0_0_20px_rgba(21,185,133,0.5)]' },
 };
 
-// INNOVATION: Specific glow mapping for the hover blink effect
 const glowMap = {
   teal: {
     shadow: ["0px 0px 10px rgba(17,201,232,0.1)", "0px 0px 35px rgba(17,201,232,0.7)", "0px 0px 10px rgba(17,201,232,0.1)"],
@@ -136,7 +137,6 @@ export default function Experience() {
                         delay: i * 0.2 
                       }}
                     >
-                      {/* Interactive Hover Card with Blinking Effect */}
                       <motion.div
                         whileHover={{ 
                           scale: 1.02,
@@ -164,6 +164,7 @@ export default function Experience() {
                             </li>
                           ))}
                         </ul>
+
                         <div className={`flex flex-wrap gap-2 mt-4 ${isLeft ? 'sm:justify-end' : 'justify-start'}`}>
                           {item.tags.map((tag) => (
                             <span
@@ -174,6 +175,19 @@ export default function Experience() {
                             </span>
                           ))}
                         </div>
+
+                        {'certUrl' in item && item.certUrl && (
+                          <div className={`mt-4 pt-3 border-t border-white/10 flex ${isLeft ? 'sm:justify-end' : 'justify-start'}`}>
+                            <a
+                              href={item.certUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg ${colors.bg} ${colors.text} hover:opacity-80 transition-opacity`}
+                            >
+                              View Certificate <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          </div>
+                        )}
                       </motion.div>
                     </motion.div>
                   </div>
