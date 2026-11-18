@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { Building2, Stethoscope } from 'lucide-react';
+import { Building2, Stethoscope, BarChart3, FileSpreadsheet } from 'lucide-react';
 
 const timeline = [
   {
@@ -28,6 +28,30 @@ const timeline = [
       'Developed patient communication and clinical observation skills',
     ],
     tags: ['8 Rotational Departments', 'Clinical Exposure', 'Patient Care'],
+    color: 'green' as const,
+  },
+  {
+    icon: <BarChart3 className="w-5 h-5" />,
+    role: 'Healthcare Data Analyst Intern',
+    org: 'Yuva Intern by Henry Harvin',
+    period: 'Jul 2026 – Aug 2026',
+    points: [
+      'Completed a virtual internship focusing on healthcare data analysis and health informatics[cite: 1].',
+      'Handled healthcare datasets, performed data cleaning, and supported data-driven insights relevant to clinical and healthcare operations[cite: 1].',
+    ],
+    tags: ['Healthcare Analytics', 'Data Analysis', 'Health Informatics', 'Data Cleaning'],
+    color: 'teal' as const,
+  },
+  {
+    icon: <FileSpreadsheet className="w-5 h-5" />,
+    role: 'Virtual Advanced Excel Efficiency Intern',
+    org: 'Yuva Intern by Henry Harvin',
+    period: 'Aug 2026 – Sep 2026',
+    points: [
+      'Completed a structured virtual internship focusing on advanced Excel tools, data manipulation, and efficiency optimization techniques[cite: 1].',
+      'Utilized advanced spreadsheet formulas and data structuring methods to streamline workflow operations.',
+    ],
+    tags: ['Microsoft Excel', 'Data Analysis', 'Efficiency Optimization', 'Data Manipulation'],
     color: 'green' as const,
   },
 ];
@@ -120,7 +144,6 @@ export default function Experience() {
                           borderColor: glow.border,
                           transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
                         }}
-                        // Swapped transition-all to transition-colors to prevent framer motion conflict
                         className={`group glass rounded-2xl p-6 border ${colors.border} hover:bg-white/[0.06] transition-colors duration-300 cursor-pointer`}
                       >
                         <div className={`flex items-center gap-3 mb-3 ${isLeft ? 'sm:flex-row-reverse' : ''}`}>
